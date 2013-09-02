@@ -65,8 +65,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;; keybinding stolen from Lighttable
 (global-set-key (kbd "<s-return>") 'eval-defun)
 (define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-defun)
-(eval-after-load 'clojure-mode
-  '(define-key clojure-mode-map (kbd "<s-return>") 'nrepl-eval-expression-at-point))
+
+;; ... add shift to eval last expression
+(global-set-key (kbd "<S-s-return>") 'eval-last-sexp)
+(define-key emacs-lisp-mode-map (kbd "<S-s-return>") 'eval-last-sexp)
 
 ;;; PAREDIT
 
@@ -191,6 +193,13 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; highlight evaluated sexp to give visual cue of action and scope
 (require 'nrepl-eval-sexp-fu)
+
+;; keybinding stolen from Lighttable
+(eval-after-load 'clojure-mode
+  '(progn
+     (define-key clojure-mode-map (kbd "<s-return>") 'nrepl-eval-expression-at-point)
+     ;; add shift to eval the last expression, rather than the top-level one
+     (define-key clojure-mode-map (kbd "<S-s-return>") 'nrepl-eval-last-expression)))
 
 ;;;;;; HASKELL 
 
