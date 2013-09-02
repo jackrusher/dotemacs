@@ -42,9 +42,11 @@ Including indent-buffer, which should not be called automatically on save."
   (cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
 
-;; prog-mode-hook to hightlight XXX, BUG and TODO in code
 (add-hook 'prog-mode-hook
           (lambda ()
+            ;; format as we go
+            (define-key (current-local-map) [remap newline] 'reindent-then-newline-and-indent)
+            ;; prog-mode-hook to hightlight XXX, BUG and TODO in code
             (font-lock-add-keywords
              nil '(("\\<\\(XXX\\|BUG\\|TODO\\)" 1 font-lock-warning-face prepend)))))
 
@@ -53,8 +55,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; highlight matching parens, please
 (show-paren-mode)
 
-(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
-(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+;;(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
 ;; paredit all the parens
 (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
@@ -203,7 +204,6 @@ Including indent-buffer, which should not be called automatically on save."
 ;;;;;; RUBY/RUBYMOTION
 
 ;; ruby, using robe
-(define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'robe-mode-hook
@@ -248,9 +248,3 @@ Including indent-buffer, which should not be called automatically on save."
   "coffee-mode-hook"
   (set (make-local-variable 'tab-width) 2))
 (add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
-
-;;;;;; CSS
-
-;; indent for me, emacs
-(eval-after-load 'css-mode
-  '(define-key css-mode-map (kbd "RET") 'reindent-then-newline-and-indent))
