@@ -33,7 +33,8 @@
 ;; "<username>-local.el" if such a file exists on the load path.
 ;; Place personal extensions to this configuration in that file to
 ;; avoid merge hassles later.
-(let ((per-user-file (concat (user-login-name) "-local.el")))
+(add-to-list 'load-path user-emacs-directory)
+(let ((per-user-file (concat user-emacs-directory (user-login-name) "-local.el")))
   (when (locate-library per-user-file) (load per-user-file)))
 
 ;; TODO bring in latex customizations from old .emacs
@@ -43,7 +44,5 @@
 ;; outside emacs (via Automator).
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
 ;;(define-key global-map "<s-E>" 'org-capture)
-;; emacs -> applescript -> browser re-load
 
 ;; TODO bring in web development stuff
-

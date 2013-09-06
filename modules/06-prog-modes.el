@@ -7,6 +7,10 @@
 (setq c-basic-offset 4)
 (setq-default indent-tabs-mode nil)
 
+;; line-wrap (fill) comments as I type
+(auto-fill-mode 1)
+(setq comment-auto-fill-only-comments t) 
+
 ;; auto-complete-mode, completion and popup help
 (require 'auto-complete)
 (require 'auto-complete-config)
@@ -46,6 +50,8 @@ Including indent-buffer, which should not be called automatically on save."
           (lambda ()
             ;; format as we go
             (define-key (current-local-map) [remap newline] 'reindent-then-newline-and-indent)
+            ;; compile short cut
+            (define-key (current-local-map) (kbd "<s-k>") 'compile)
             ;; prog-mode-hook to hightlight XXX, BUG and TODO in code
             (font-lock-add-keywords
              nil '(("\\<\\(XXX\\|BUG\\|TODO\\)" 1 font-lock-warning-face prepend)))))
@@ -122,11 +128,9 @@ Including indent-buffer, which should not be called automatically on save."
              :scroll-bar t
              :margin t))
 
-(define-key lisp-interaction-mode-map (kbd "C-c C-d") 'elisp-popup-doc)
+(define-key lisp-interaction-mode-map (kbd "C-c d") 'elisp-popup-doc)
+(define-key emacs-lisp-mode-map (kbd "C-c d") 'elisp-popup-doc)
 (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
-
-;; BUG currently shadowed?
-(define-key emacs-lisp-mode-map (kbd "C-c C-d") 'elisp-popup-doc)
 
 ;; TODO binding?
 (defun eval-and-replace ()
@@ -143,6 +147,40 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;;;; use geiser for racket (also good for guile)
 (setq geiser-active-implementations '(racket))
+
+;; TODO eval-sexp-fu for geiser -- actually want some other kind of
+;; defadvice setup that puts the shim between me and every lisp mode
+;; TODO get an ac-popup to come up with the docs while typing racket
+;; function names
+(eval-after-load 'geiser
+  '(progn
+     (require 'geiser-company)
+
+     ;; (defun jackrusher:geiser-ac-doc (fname &optional module impl)
+     ;;    (let* ((symbol (intern fname))
+     ;;           (impl (or impl geiser-impl--implementation))
+     ;;           (module (geiser-doc--module (or module (geiser-eval--get-module))
+     ;;                                       impl)))
+     ;;      (-when-let (ds (geiser-doc--get-docstring symbol module))
+     ;;        (ignore-errors
+     ;;          (with-temp-buffer
+     ;;            (geiser-doc--insert-title
+     ;;             (geiser-autodoc--str* (cdr (assoc "signature" ds))))
+     ;;            (newline)
+     ;;            (insert (or (cdr (assoc "docstring" ds)) ""))
+     ;;            (buffer-string))))))
+
+     ;;  (ac-define-source geiser
+     ;;    '((candidates . (progn
+     ;;                      (geiser-company--prefix-at-point)
+     ;;                      (cdr geiser-company--completions)))
+     ;;      (document   . jackrusher:geiser-ac-doc)))
+
+     ;;  (add-to-list 'ac-sources 'ac-source-geiser)
+
+      (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
+      (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
+      (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
 
 ;;; COMMON LISP
 
@@ -177,7 +215,7 @@ Including indent-buffer, which should not be called automatically on save."
 (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
+(define-key nrepl-interaction-mode-map (kbd "C-c d") 'ac-nrepl-popup-doc)
 
 ;; add ritz to nrepl under clojure XXX
 ;; (add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)

@@ -5,6 +5,9 @@
 (add-to-list 'auto-mode-alist
              '("\\.\\(md\\|markdown\\)$" . markdown-mode) auto-mode-alist)
 
+;; GitHub-flavoured markdown for what look like GH README files
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
 (dolist (hook '(text-mode-hook))
       (add-hook hook (lambda () (flyspell-mode 1))))
 
