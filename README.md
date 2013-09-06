@@ -85,7 +85,6 @@ bound to C-SPC).
 | Ctrl-x        | Execute (start seq)       | *                  | X
 | Ctrl-y        | Yank previously killed    | *                  | *
 | Ctrl-z        | Suspend process           | *                  | X
-| Command-enter | Full screen mode          | *                  | *
 
 The usual OSX command key bindings are mostly supported. Command-S
 saves, Command-F "finds" (searches forward), cut and paste, selection,
@@ -166,6 +165,10 @@ SLIME, nREPL, run-ruby, run-python, and so on. There's a great deal of
 power when interacting with external interpretors in emacs, but it's
 more than I have time to write about just now. TK.
 
+In emacs lisp, scheme and clojure modes, `eval-defun` (which evaluates
+the top level of the current form) and `eval-last-sexp` are bound to
+command-enter and command-shift-enter respectively.
+
 ## RESOURCES
 
 Watch this video on
@@ -179,4 +182,5 @@ be wise to have a look at the
 Do not fight paredit. Paredit is your friend.
 
 Those who build the web should look into
-[skewer-mode](https://github.com/skeeto/skewer-mode).
+[skewer-mode](https://github.com/skeeto/skewer-mode) for live browser
+mind control.
