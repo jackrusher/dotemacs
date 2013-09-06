@@ -32,6 +32,7 @@
 (setq default-cursor-type 'bar)
 
 ;; fancy lambda, &c
+(require 'pretty-symbols-mode)
 (global-prettify-symbols-mode 1)
 (mapc (lambda (m) (add-hook m (lambda () (push '("fn" . ?ƒ) prettify-symbols-alist))))
       '(clojure-mode-hook clojurescript-mode-hook))
