@@ -9,7 +9,7 @@
 
 ;; line-wrap (fill) comments as I type
 (auto-fill-mode 1)
-(setq comment-auto-fill-only-comments t) 
+(setq comment-auto-fill-only-comments t)
 
 ;; auto-complete-mode, completion and popup help
 (require 'auto-complete)
@@ -46,12 +46,16 @@ Including indent-buffer, which should not be called automatically on save."
   (cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
 
+;; these are bound to "kill-this-buffer" by default
+(global-set-key (kbd "s-K") nil)
+(global-set-key (kbd "s-k") nil)
 (add-hook 'prog-mode-hook
           (lambda ()
             ;; format as we go
             (define-key (current-local-map) [remap newline] 'reindent-then-newline-and-indent)
-            ;; compile short cut
-            (define-key (current-local-map) (kbd "<s-k>") 'compile)
+            ;; compile short cuts
+            (define-key (current-local-map) (kbd "s-K") 'compile)
+            (define-key (current-local-map) (kbd "s-k") 'recompile)
             ;; prog-mode-hook to hightlight XXX, BUG and TODO in code
             (font-lock-add-keywords
              nil '(("\\<\\(XXX\\|BUG\\|TODO\\)" 1 font-lock-warning-face prepend)))))

@@ -32,6 +32,9 @@
 (global-set-key (kbd "C-<backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "C-M-<backspace>") 'backward-kill-paragraph)
 
+;; chorded backward kill magnifiers
+(global-set-key [C-M-kp-delete] 'kill-paragraph)
+
 ;; prefer regexp in my backward search, inputrc-compatible binding
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 

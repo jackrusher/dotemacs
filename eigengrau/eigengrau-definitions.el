@@ -500,7 +500,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (message-header-cc ((t (,@fmt-bold ,@fg-green))))
                       (message-header-to ((t (,@fmt-bold ,@fg-base1))))
                       ;; parenface
-                      (paren-face ((t (,@fg-base01))))
+                      ;; XXX darkened, maybe darker?
+                      (paren-face ((t (,@fg-base02))))
                       ;; rainbow-delimiters
                       (rainbow-delimiters-depth-1-face ((t (,@fg-cyan))))
                       (rainbow-delimiters-depth-2-face ((t (,@fg-yellow))))

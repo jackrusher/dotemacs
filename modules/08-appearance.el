@@ -40,7 +40,7 @@
 (eval-after-load 'undo-tree
   '(diminish 'undo-tree-mode))
 
-;; locally hack version of noctilux
+;; locally hacked version of noctilux, turning into something else
 (add-to-list 'load-path (concat user-emacs-directory "eigengrau/"))
 (require 'eigengrau-theme)
 

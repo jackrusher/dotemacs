@@ -26,7 +26,8 @@
 (define-key global-map (kbd "<M-kp-delete>") 'paredit-forward-kill-word)
 
 ;; ESC is normally used to begin certain control sequences in emacs,
-;; but universally used for 'quit' outside of it.
+;; but universally used for 'quit' by everything else. This normalizes
+;; with everything else.
 (defun jackrusher-escape-quit ()
   "Quit the current action, a la C-g, and unhighlight any
 lingering search matches."
@@ -57,3 +58,10 @@ lingering search matches."
 
 ;; option-delete = backword-kill-word in OS X
 (global-set-key (kbd "M-<backspace>") 'backward-kill-word)
+
+;; I like a single frame, so I'd rather have this kill the buffer
+(global-set-key (kbd "s-w") 'kill-this-buffer)
+
+;; I never want to see the OS file finder
+(require 'find-file-in-project)
+(global-set-key (kbd "s-o") 'find-file-in-project)
