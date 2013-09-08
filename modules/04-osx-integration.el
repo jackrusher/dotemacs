@@ -45,11 +45,13 @@ lingering search matches."
 ;; the fantastic undo-tree-visualize on C-s-z
 (global-set-key [C-s-268632090] 'undo-tree-visualize)
 
-;; command-f, the default OSX search keybinding => regexp forward search
+;; command-f, the default OSX search keybinding, but with regexp
 (global-set-key (kbd "s-f") 'isearch-forward-regexp)
 
 ;; command-r, forward-replace
-(global-set-key (kbd "s-r") 'query-replace-regexp)
+(require 'visual-regexp)
+(global-set-key (kbd "s-r") 'vr/replace)
+(global-set-key [8388690] 'vr/query-replace) ; s-R
 
 ;; make M-up and M-down the same as C-up and C-down because the former
 ;; is how it's bound in OSX

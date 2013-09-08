@@ -85,12 +85,22 @@ other languages).
 The usual OS X bindings for begin/end of line (`s-left arrow`,`s-right
 arrow`) and top/bottom of document (`s-up arrow`, `s-down arrow`), page up and page down, and so forth, are also supported.
 
-Although these key combinations provide for rapid navigation, one
+### SEARCHING
+
+Although the above key combinations provide for rapid navigation, one
 should generally use them only for short movements, preferring to jump
-around inside a file using search forward (`C-s`/`s-f`) or search
-reverse (`C-r`). Also, if the target is visible on screen,
+around inside a file using search forward (both of `C-s` and `s-f`) or
+search reverse (`C-r`). Also, if the target is visible on screen,
 [ace-jump-mode](http://www.youtube.com/watch?v=UZkpmegySnc) is a
 lovely. It is bound to `C-space`.
+
+The marvelous
+[visual-regexp](https://github.com/benma/visual-regexp.el) is bound to
+`s-r` (and `visual-query-regexp` to `s-R`). These functions provide
+regular expression query/replace with a live preview of matches and
+replacements. The latter 'query' version iterates over the matches,
+replacing ones where the user presses `space` and skipping the ones
+where the user presses `delete`.
 
 ### DELETING ("KILLING")
 
