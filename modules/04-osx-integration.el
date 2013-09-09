@@ -67,3 +67,7 @@ lingering search matches."
 ;; I never want to see the OS file finder
 (require 'find-file-in-project)
 (global-set-key (kbd "s-o") 'find-file-in-project)
+
+;; don't use the right alt/option key as M-, so it can still be used
+;; to type accented characters. Fück yeah.
+(setq ns-right-alternate-modifier nil)
