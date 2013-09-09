@@ -499,9 +499,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (message-header-subject ((t (,@fg-base00))))
                       (message-header-cc ((t (,@fmt-bold ,@fg-green))))
                       (message-header-to ((t (,@fmt-bold ,@fg-base1))))
-                      ;; parenface
-                      ;; XXX darkened, maybe darker?
-                      (paren-face ((t (,@fg-base02))))
+                      ;; parenface, dim the parens 
+                      (paren-face ((t (,@fg-base1))))
                       ;; rainbow-delimiters
                       (rainbow-delimiters-depth-1-face ((t (,@fg-cyan))))
                       (rainbow-delimiters-depth-2-face ((t (,@fg-yellow))))
@@ -578,7 +577,10 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       ;; eval-sexp-fu flashes
                       (eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
                       (nrepl-eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
-                      (nrepl-error-highlight-face ((t (:background "black" :foreground "red" :underline t)))))
+                      (nrepl-error-highlight-face ((t (:background "black" :foreground "red" :underline t))))
+
+                      ;; ace-jump-mode highlights like sexp-fu flashes
+                      (ace-jump-face-foreground ((t (:background "#0A414C" :foreground "#84FBFF")))))
                      
                      ((foreground-color . ,(when (<= 16 (display-color-cells)) base0))
                       (background-color . ,back)
