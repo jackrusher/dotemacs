@@ -499,7 +499,7 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (message-header-subject ((t (,@fg-base00))))
                       (message-header-cc ((t (,@fmt-bold ,@fg-green))))
                       (message-header-to ((t (,@fmt-bold ,@fg-base1))))
-                      ;; parenface, dim the parens 
+                      ;; parenface, dim the parens (not working?) 
                       (paren-face ((t (,@fg-base1))))
                       ;; rainbow-delimiters
                       (rainbow-delimiters-depth-1-face ((t (,@fg-cyan))))
