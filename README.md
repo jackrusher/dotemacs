@@ -165,7 +165,9 @@ In emacs lisp, scheme and clojure modes, `eval-defun` (which evaluates
 the top level of the current lisp form) and `eval-last-sexp` are bound
 to `s-enter` and `s-shift-enter` respectively. In most cases the
 evaluated code will flash momentarily to indicate the scope in which
-the evaluation occurred.
+the evaluation occurred. Also, short documentation for the current
+function should be visible in the mini-buffer and `C-c d` should pop
+up further docs on the symbol at point.
 
 ## RESOURCES
 
