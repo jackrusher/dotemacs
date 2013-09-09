@@ -36,10 +36,6 @@
 (mapc (lambda (m) (add-hook m (lambda () (push '("fn" . ?ƒ) prettify-symbols-alist))))
       '(clojure-mode-hook clojurescript-mode-hook))
 
-;; dim the parentheses
-(require 'parenface-plus)
-(set-face-foreground 'paren-face "#666")
-
 (eval-after-load 'undo-tree
   '(diminish 'undo-tree-mode))
 
@@ -50,6 +46,10 @@
 ;; powerline gives a much aesthetically improved mode line
 (require 'powerline)
 (powerline-center-theme)
+
+;; dim the parentheses
+(require 'parenface-plus)
+(set-face-foreground 'paren-face "#666")
 
 ;; TODO customize ac-complete for color theme
 ;(set-face-background 'ac-candidate-face "#366060")

@@ -299,3 +299,8 @@ Including indent-buffer, which should not be called automatically on save."
   "coffee-mode-hook"
   (set (make-local-variable 'tab-width) 2))
 (add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
+
+;;;;;; Some helpful gear for rest interfaces
+
+(require 'restclient)
+(define-key restclient-mode-map (kbd "<s-return>") 'restclient-http-send-current)
