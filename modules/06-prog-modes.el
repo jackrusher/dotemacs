@@ -304,3 +304,12 @@ Including indent-buffer, which should not be called automatically on save."
 
 (require 'restclient)
 (define-key restclient-mode-map (kbd "<s-return>") 'restclient-http-send-current)
+
+;;;;;; CSS isn't really programming, but...
+
+(eval-after-load 'css-mode
+  (progn
+    (add-hook 'css-mode-hook 'rainbow-turn-on)
+    (define-key css-mode-map
+      [remap newline] 'reindent-then-newline-and-indent)))
+
