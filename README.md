@@ -31,7 +31,10 @@ via one's inputrc).
 
 The usual OSX command key bindings are mostly supported. Command-S
 saves, Command-F "finds" (searches forward), cut and paste, selection,
-and so on all operate normally.
+and so on all operate normally. Some commands are modified so that
+they're the emacs semantic equivalent of their OS X counterparts. For
+example, Command-w "kills" (closes) the current buffer rather the
+window (which should be full-screen most of the time).
 
 The emacs notation for key sequences looks like `a` (press a), `C-c`
 (control + c), `M-x` ("meta ex", where "meta" is the alt/option key in
