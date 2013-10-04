@@ -155,7 +155,7 @@ also list the shortcuts keys that are bound to that function.
 
 ## SOURCE CONTROL
 
-[Magit](http://philjackson.github.com/magit/) is a nice integrated git
+[Magit](https://github.com/magit/magit) is a nice integrated git
 for emacs. There are others like it, but this one is my favorite.
 
 ## DYNAMIC LANGUAGES
