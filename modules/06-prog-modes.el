@@ -150,41 +150,22 @@ Including indent-buffer, which should not be called automatically on save."
 ;;; SCHEME
 
 ;;;; use geiser for racket (also good for guile)
+(require 'geiser)
 (setq geiser-active-implementations '(racket))
+
+(require 'ac-geiser)
+(add-hook 'geiser-mode-hook 'ac-geiser-setup)
+(add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'geiser-repl-mode))
 
 ;; TODO eval-sexp-fu for geiser -- actually want some other kind of
 ;; defadvice setup that puts the shim between me and every lisp mode
-;; TODO get an ac-popup to come up with the docs while typing racket
-;; function names
-(eval-after-load 'geiser
-  '(progn
-     (require 'geiser-company)
-
-     ;; (defun jackrusher:geiser-ac-doc (fname &optional module impl)
-     ;;    (let* ((symbol (intern fname))
-     ;;           (impl (or impl geiser-impl--implementation))
-     ;;           (module (geiser-doc--module (or module (geiser-eval--get-module))
-     ;;                                       impl)))
-     ;;      (-when-let (ds (geiser-doc--get-docstring symbol module))
-     ;;        (ignore-errors
-     ;;          (with-temp-buffer
-     ;;            (geiser-doc--insert-title
-     ;;             (geiser-autodoc--str* (cdr (assoc "signature" ds))))
-     ;;            (newline)
-     ;;            (insert (or (cdr (assoc "docstring" ds)) ""))
-     ;;            (buffer-string))))))
-
-     ;;  (ac-define-source geiser
-     ;;    '((candidates . (progn
-     ;;                      (geiser-company--prefix-at-point)
-     ;;                      (cdr geiser-company--completions)))
-     ;;      (document   . jackrusher:geiser-ac-doc)))
-
-     ;;  (add-to-list 'ac-sources 'ac-source-geiser)
-
-      (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
-      (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
-      (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
+;; (eval-after-load 'geiser
+;;   '(progn
+;;       (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
+;;       (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
+;;       (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
 
 ;;; COMMON LISP
 
