@@ -67,11 +67,6 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;;(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
-;; paredit all the parens
-(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
-    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-              'paredit-mode))
-
 ;; keybinding stolen from Lighttable
 (global-set-key (kbd "<s-return>") 'eval-defun)
 (define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-defun)
@@ -82,39 +77,58 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;;; PAREDIT
 
+;; paredit all the parens
+;; (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+;;     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+;;               'paredit-mode))
+
 ;; adjust paredit's key bindings so they don't override my preferred
 ;; navigation keys, add brace matching goodies across all modes
-(eval-after-load 'paredit
-  '(progn
-     ;; fights with my preferred navigation keys
-     (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
-       (define-key paredit-mode-map binding nil))
+;; (eval-after-load 'paredit
+;;   '(progn
+;;      ;; fights with my preferred navigation keys
+;;      (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
+;;        (define-key paredit-mode-map binding nil))
 
-     ;; not just in lisp mode(s) 
-     (global-set-key (kbd "C-M-<left>") 'backward-sexp)
-     (global-set-key (kbd "C-M-<right>") 'forward-sexp)
+;;      ;; not just in lisp mode(s) 
+;;      (global-set-key (kbd "C-M-<left>") 'backward-sexp)
+;;      (global-set-key (kbd "C-M-<right>") 'forward-sexp)
 
-     (global-set-key (kbd "M-(") 'paredit-wrap-round)
-     (global-set-key (kbd "M-[") 'paredit-wrap-square)
-     (global-set-key (kbd "M-{") 'paredit-wrap-curly)
+;;      (global-set-key (kbd "M-(") 'paredit-wrap-round)
+;;      (global-set-key (kbd "M-[") 'paredit-wrap-square)
+;;      (global-set-key (kbd "M-{") 'paredit-wrap-curly)
 
-     (global-set-key (kbd "M-)") 'paredit-close-round-and-newline)
-     (global-set-key (kbd "M-]") 'paredit-close-square-and-newline)
-     (global-set-key (kbd "M-}") 'paredit-close-curly-and-newline)
+;;      (global-set-key (kbd "M-)") 'paredit-close-round-and-newline)
+;;      (global-set-key (kbd "M-]") 'paredit-close-square-and-newline)
+;;      (global-set-key (kbd "M-}") 'paredit-close-curly-and-newline)
 
-	 (diminish 'paredit-mode)))
+;; 	 (diminish 'paredit-mode)))
 
-;; Enable `paredit-mode' in the minibuffer, during `eval-expression'.
-(defun conditionally-enable-paredit-mode ()
-  (if (eq this-command 'eval-expression)
-      (paredit-mode 1)))
+;; ;; Enable `paredit-mode' in the minibuffer, during `eval-expression'.
+;; (defun conditionally-enable-paredit-mode ()
+;;   (if (eq this-command 'eval-expression)
+;;       (paredit-mode 1)))
 
-(add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
+;; (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
 
-;; making paredit work with delete-selection-mode
-(put 'paredit-forward-delete 'delete-selection 'supersede)
-(put 'paredit-backward-delete 'delete-selection 'supersede)
-(put 'paredit-newline 'delete-selection t)
+;; ;; making paredit work with delete-selection-mode
+;; (put 'paredit-forward-delete 'delete-selection 'supersede)
+;; (put 'paredit-backward-delete 'delete-selection 'supersede)
+;; (put 'paredit-newline 'delete-selection t)
+
+;; SMARTPARENS
+
+(require 'smartparens)
+(sp-use-paredit-bindings)
+
+;; fights with my preferred navigation keys
+(dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
+  (define-key smartparens-mode-map binding nil))
+
+;; paredit all the parens
+(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              'smartparens-mode))
 
 ;;; ELISP
 
