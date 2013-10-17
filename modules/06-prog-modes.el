@@ -120,12 +120,16 @@ Including indent-buffer, which should not be called automatically on save."
 
 (require 'smartparens)
 (sp-use-paredit-bindings)
+(smartparens-strict-mode)
 
 ;; fights with my preferred navigation keys
 (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
   (define-key smartparens-mode-map binding nil))
 
-;; paredit all the parens
+;; make it work like paredit
+(define-key smartparens-mode-map (kbd "C-k") 'sp-kill-sexp)
+
+;; smartedit all the parens
 (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
               'smartparens-mode))
