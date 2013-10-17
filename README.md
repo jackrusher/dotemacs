@@ -180,9 +180,9 @@ a feature every code editor should have. In this configuration, it's
 bound to `s-1` and "contract-region" is bound to `s-2`.
 
 If one intends to hack clojure, Common Lisp, scheme or elisp, it would
-be wise to have a look at the
-[paredit cheat sheet](http://www.emacswiki.org/pics/static/PareditCheatsheet.png).
-Do not fight paredit. Paredit is your friend.
+be wise to get to know
+[SmartParens](https://github.com/Fuco1/smartparens/wiki/Paredit-and-smartparens),
+which has been added as a replacement for _paredit_.
 
 Those who build the web should look into
 [skewer-mode](https://github.com/skeeto/skewer-mode) for live browser
