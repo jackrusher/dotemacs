@@ -21,6 +21,12 @@ number of packages via ELPA/MELPA/Marmalade the first time emacs is
 run with it. This takes time, and there may be transient errors that
 require one to quit and restart a couple of times to get it done.
 
+### CUSTOMIZATION
+
+If you would like to extend this configuration, create a
+`<username>-local.el` file within your `.emacs.d` directory and that
+file will be loaded after this configuration has been initialized.
+
 ## A PRIMER
 
 One of the goals of this configuration is to avoid the cognitive load
