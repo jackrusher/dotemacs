@@ -578,6 +578,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
                       (nrepl-eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
                       (nrepl-error-highlight-face ((t (:background "black" :foreground "red" :underline t))))
+                      (cider-eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
+                      (cider-error-highlight-face ((t (:background "black" :foreground "red" :underline t))))
 
                       ;; ace-jump-mode highlights like sexp-fu flashes
                       (ace-jump-face-foreground ((t (:background "#0A414C" :foreground "#84FBFF")))))

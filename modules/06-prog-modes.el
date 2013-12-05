@@ -78,61 +78,61 @@ Including indent-buffer, which should not be called automatically on save."
 ;;; PAREDIT
 
 ;; paredit all the parens
-;; (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
-;;     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-;;               'paredit-mode))
+(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              'paredit-mode))
 
 ;; adjust paredit's key bindings so they don't override my preferred
 ;; navigation keys, add brace matching goodies across all modes
-;; (eval-after-load 'paredit
-;;   '(progn
-;;      ;; fights with my preferred navigation keys
-;;      (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
-;;        (define-key paredit-mode-map binding nil))
+(eval-after-load 'paredit
+  '(progn
+     ;; fights with my preferred navigation keys
+     (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
+       (define-key paredit-mode-map binding nil))
 
-;;      ;; not just in lisp mode(s) 
-;;      (global-set-key (kbd "C-M-<left>") 'backward-sexp)
-;;      (global-set-key (kbd "C-M-<right>") 'forward-sexp)
+     ;; not just in lisp mode(s) 
+     (global-set-key (kbd "C-M-<left>") 'backward-sexp)
+     (global-set-key (kbd "C-M-<right>") 'forward-sexp)
 
-;;      (global-set-key (kbd "M-(") 'paredit-wrap-round)
-;;      (global-set-key (kbd "M-[") 'paredit-wrap-square)
-;;      (global-set-key (kbd "M-{") 'paredit-wrap-curly)
+     (global-set-key (kbd "M-(") 'paredit-wrap-round)
+     (global-set-key (kbd "M-[") 'paredit-wrap-square)
+     (global-set-key (kbd "M-{") 'paredit-wrap-curly)
 
-;;      (global-set-key (kbd "M-)") 'paredit-close-round-and-newline)
-;;      (global-set-key (kbd "M-]") 'paredit-close-square-and-newline)
-;;      (global-set-key (kbd "M-}") 'paredit-close-curly-and-newline)
+     (global-set-key (kbd "M-)") 'paredit-close-round-and-newline)
+     (global-set-key (kbd "M-]") 'paredit-close-square-and-newline)
+     (global-set-key (kbd "M-}") 'paredit-close-curly-and-newline)
 
-;; 	 (diminish 'paredit-mode)))
+	 (diminish 'paredit-mode)))
 
-;; ;; Enable `paredit-mode' in the minibuffer, during `eval-expression'.
+;; Enable `paredit-mode' in the minibuffer, during `eval-expression'.
 ;; (defun conditionally-enable-paredit-mode ()
 ;;   (if (eq this-command 'eval-expression)
 ;;       (paredit-mode 1)))
 
 ;; (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode)
 
-;; ;; making paredit work with delete-selection-mode
-;; (put 'paredit-forward-delete 'delete-selection 'supersede)
-;; (put 'paredit-backward-delete 'delete-selection 'supersede)
-;; (put 'paredit-newline 'delete-selection t)
+;; making paredit work with delete-selection-mode
+(put 'paredit-forward-delete 'delete-selection 'supersede)
+(put 'paredit-backward-delete 'delete-selection 'supersede)
+(put 'paredit-newline 'delete-selection t)
 
 ;; SMARTPARENS
 
-(require 'smartparens)
-(sp-use-paredit-bindings)
-(smartparens-strict-mode)
+;; (require 'smartparens)
+;; (sp-use-paredit-bindings)
+;; (smartparens-strict-mode)
 
-;; fights with my preferred navigation keys
-(dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
-  (define-key smartparens-mode-map binding nil))
+;; ;; fights with my preferred navigation keys
+;; (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "C-M-<left>") (kbd "C-M-<right>")))
+;;   (define-key smartparens-mode-map binding nil))
 
-;; make it work like paredit
-(define-key smartparens-mode-map (kbd "C-k") 'sp-kill-sexp)
+;; ;; make it work like paredit
+;; (define-key smartparens-mode-map (kbd "C-k") 'sp-kill-sexp)
 
-;; smartedit all the parens
-(dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
-    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-              'smartparens-mode))
+;; ;; smartedit all the parens
+;; (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+;;     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+;;               'smartparens-mode))
 
 ;;; ELISP
 
@@ -205,42 +205,40 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;;; CLOJURE
 
-;; ac-mode for clojure and the nREPL
+;; ac-mode for clojure/cider
 (eval-after-load "auto-complete"
   '(progn
     (add-to-list 'ac-modes 'clojure-mode)
-	(add-to-list 'ac-modes 'nrepl-mode)))
+	(add-to-list 'ac-modes 'cider-mode)))
 
-(require 'ac-nrepl)
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-
-(add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(define-key nrepl-interaction-mode-map (kbd "C-c d") 'ac-nrepl-popup-doc)
-
-;; add ritz to nrepl under clojure XXX
-;; (add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
-;; (defun my-nrepl-mode-setup ()
-;;   (require 'nrepl-ritz))
-
-;; this is needed to prevent ac-nrepl from breaking
-;; nrepl-jack-in
-(setq nrepl-connected-hook (reverse nrepl-connected-hook))
-
-;; no need, no need!
-(setq nrepl-popup-stacktraces nil)
-
-;; highlight evaluated sexp to give visual cue of action and scope
-(require 'nrepl-eval-sexp-fu)
+(eval-after-load "cider"
+  '(progn
+     (require 'ac-nrepl)
+     (add-hook 'cider-mode-hook 'ac-nrepl-setup)
+     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
+     (add-hook 'cider-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+     (add-hook 'cider-interaction-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-interaction-mode-hook 'ac-nrepl-setup)
+     (define-key cider-mode-map (kbd "C-c d") 'ac-nrepl-popup-doc)
+     (setq cider-popup-stacktraces nil)
+     (setq cider-repl-pop-to-buffer-on-connect nil)))
 
 ;; keybinding stolen from Lighttable
 (eval-after-load 'clojure-mode
   '(progn
-     (define-key clojure-mode-map (kbd "<s-return>") 'nrepl-eval-expression-at-point)
+     (define-key clojure-mode-map (kbd "<s-return>") 'cider-eval-defun-at-point)
      ;; add shift to eval the last expression, rather than the top-level one
-     (define-key clojure-mode-map (kbd "<S-s-return>") 'nrepl-eval-last-expression)))
+     (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-last-expression)))
+
+(require 'nrepl-eval-sexp-fu)
+(setq nrepl-eval-sexp-fu-flash-duration 0.3)
+
+;; temporary local version until package added to melpa
+
+(load (concat user-emacs-directory "cider-eval-sexp-fu.el"))
+(require 'cider-eval-sexp-fu)
+(setq cider-eval-sexp-fu-flash-duration 0.3)
 
 ;;;;;; HASKELL 
 
@@ -310,5 +308,6 @@ Including indent-buffer, which should not be called automatically on save."
   (progn
     (add-hook 'css-mode-hook 'rainbow-turn-on)
     (define-key css-mode-map
-      [remap newline] 'reindent-then-newline-and-indent)))
+      [remap newline] 'newline-and-indent)))
+
 
