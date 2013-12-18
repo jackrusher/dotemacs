@@ -32,7 +32,8 @@ there's no active region -- sends the current line."
     (prog1 map
       (define-key map (kbd "C-x C-e") 'skewer-coffee-eval-region)
       (define-key map (kbd "C-M-x")   'skewer-coffee-eval-defun)
-      (define-key map (kbd "C-c C-k") 'skewer-coffee-eval-buffer)))
+      (define-key map (kbd "C-c C-k") 'skewer-coffee-eval-buffer)
+      (define-key map (kbd "<s-return>") 'skewer-coffee-eval-defun)))
   "Keymap for skewer-coffee-mode.")
 
 ;;;###autoload

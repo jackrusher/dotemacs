@@ -2,6 +2,18 @@
 
 ;;; GENERAL
 
+;; weirdly not in railwaycat's emacs mac os x
+(defun newline-and-indent ()
+  "Insert a newline, then indent according to major mode.
+Indentation is done using the value of `indent-line-function'.
+In programming language modes, this is the same as TAB.
+In some text modes, where TAB inserts a tab, this command indents to the
+column specified by the function `current-left-margin'."
+  (interactive "*")
+  (delete-horizontal-space t)
+  (newline)
+  (indent-according-to-mode))
+
 ;; four space tab stops in general, using spaces
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
@@ -224,7 +236,7 @@ Including indent-buffer, which should not be called automatically on save."
      (setq cider-popup-stacktraces nil)
      (setq cider-repl-pop-to-buffer-on-connect nil)))
 
-;; keybinding stolen from Lighttable
+;; I like this keybinding from Lighttable
 (eval-after-load 'clojure-mode
   '(progn
      (define-key clojure-mode-map (kbd "<s-return>") 'cider-eval-defun-at-point)
@@ -277,6 +289,10 @@ Including indent-buffer, which should not be called automatically on save."
 (setq-default js2-global-externs '("module" "require" "jQuery" "$" "_" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+;; this looks great, but it currently locks emacs (!)
+;;(require 'ac-js2)
+;;(add-hook 'js2-mode-hook 'ac-js2-mode)
+
 ;; skewer mode for browser mind control
 (require 'skewer-mode)
 (require 'skewer-repl)
@@ -288,6 +304,9 @@ Including indent-buffer, which should not be called automatically on save."
     (httpd-start)
     (message "Ready to skewer the browser. Now jack in with the bookmarklet.")))
 
+(define-key skewer-mode-map (kbd "<s-return>") 'skewer-eval-defun)
+(define-key skewer-mode-map (kbd "<S-s-return>") 'skewer-eval-last-expression)
+
 ;; Bookmarklet to connect to skewer from the browser:
 ;; javascript:(function(){var d=document ;var s=d.createElement('script');s.src='http://localhost:8023/skewer';d.body.appendChild(s);})()
 
@@ -296,6 +315,9 @@ Including indent-buffer, which should not be called automatically on save."
   "coffee-mode-hook"
   (set (make-local-variable 'tab-width) 2))
 (add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
+
+(require 'flymake-coffee)
+(add-hook 'coffee-mode-hook 'flymake-coffee-load)
 
 ;;;;;; Some helpful gear for rest interfaces
 
@@ -309,5 +331,4 @@ Including indent-buffer, which should not be called automatically on save."
     (add-hook 'css-mode-hook 'rainbow-turn-on)
     (define-key css-mode-map
       [remap newline] 'newline-and-indent)))
-
 
