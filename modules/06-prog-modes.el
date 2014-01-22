@@ -182,20 +182,16 @@ Including indent-buffer, which should not be called automatically on save."
 ;;;; use geiser for racket (also good for guile)
 (require 'geiser)
 (setq geiser-active-implementations '(racket))
+;; (progn
+;;   (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
+;;   (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
+;;   (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp))
 
-(require 'ac-geiser)
-(add-hook 'geiser-mode-hook 'ac-geiser-setup)
-(add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'geiser-repl-mode))
-
-;; TODO eval-sexp-fu for geiser -- actually want some other kind of
-;; defadvice setup that puts the shim between me and every lisp mode
-;; (eval-after-load 'geiser
-;;   '(progn
-;;       (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
-;;       (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
-;;       (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
+;; (require 'ac-geiser)
+;; (add-hook 'geiser-mode-hook 'ac-geiser-setup)
+;; (add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'geiser-repl-mode))
 
 ;;; COMMON LISP
 
