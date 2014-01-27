@@ -12,7 +12,7 @@ If you would like to test out this configuration, clone this repo and
 place it in your home directory as the directory `.emacs.d`.
 
 I install emacs on Mac OS X using this
-[homebrew](http://mxcl.github.com/homebrew/) recipe:
+[homebrew](http://brew.sh/) recipe:
 
 $ brew install emacs --HEAD --use-git-head --cocoa --srgb
 
