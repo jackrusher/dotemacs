@@ -9,6 +9,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; this is a single user workstation config, we don't need lockfiles
+(setq create-lockfiles nil)
+
 ;; Save point position between sessions
 (require 'saveplace)
 (setq-default save-place t)
