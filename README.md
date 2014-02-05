@@ -14,9 +14,18 @@ place it in your home directory as the directory `.emacs.d`.
 I install emacs on Mac OS X using this
 [homebrew](http://brew.sh/) recipe:
 
+```bash
 $ brew install emacs --HEAD --use-git-head --cocoa --srgb
+```
 
-Note that this configuration automatically installs a somewhat large
+You should also install the [Aspell](http://aspell.net/) spell checker, required by
+[Flyspell](http://www.emacswiki.org/emacs/FlySpell):
+
+```bash
+$ brew install aspell --with-lang-en
+```
+
+Note that this emacs configuration automatically installs a somewhat large
 number of packages via ELPA/MELPA/Marmalade the first time emacs is
 run with it. This takes time, and there may be transient errors that
 require one to quit and restart a couple of times to get it done.
