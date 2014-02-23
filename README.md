@@ -15,7 +15,7 @@ I install emacs on Mac OS X using this
 [homebrew](http://brew.sh/) recipe:
 
 ```bash
-$ brew install emacs --HEAD --use-git-head --cocoa --srgb
+$ brew install emacs --HEAD --use-git-head --cocoa
 ```
 
 You should also install the [Aspell](http://aspell.net/) spell checker, required by
