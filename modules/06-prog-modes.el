@@ -193,23 +193,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; (eval-after-load "auto-complete"
 ;;   '(add-to-list 'ac-modes 'geiser-repl-mode))
 
-;;; COMMON LISP
-
-;; Clozure CL or sbcl with quicklisp under slime
-(setq slime-lisp-implementations
-           '((ccl64 ("/usr/local/bin/ccl64" "-K utf-8") :coding-system utf-8-unix)
-             (sbcl ("/usr/local/bin/sbcl --noinform") :coding-system utf-8-unix)))
-
-;; install the quicklisp helper
-(let ((ql-slime-help (expand-file-name "~/quicklisp/slime-helper.el")))
-  (when (file-exists-p ql-slime-help) (load ql-slime-help)))
-
-;; add auto-completion for slime
-(slime-setup '(slime-fancy))
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete"
-   '(add-to-list 'ac-modes 'slime-repl-mode))
+;;; XXX COMMON LISP moved to private config for the moment
 
 ;;; CLOJURE
 

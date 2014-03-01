@@ -18,17 +18,34 @@ I install emacs on Mac OS X using this
 $ brew install emacs --HEAD --use-git-head --cocoa
 ```
 
-You should also install the [Aspell](http://aspell.net/) spell checker, required by
+Next, install [Cask](http://cask.github.io/):
+
+```bash
+$ brew install cask
+```
+
+After installation, create a symlink pointing from your user directory
+to the cask folder installed by Homebrew:
+
+```bash
+$ ln -s /usr/local/Cellar/cask/`cask --version` ~/.cask
+```
+
+Now change to your `.emacs.d` directory and use `cask` to install the
+package dependencies:
+
+```bash
+$ cd ~/.emacs.d
+$ cask install
+```
+
+Once this is complete, you should also install the
+[Aspell](http://aspell.net/) spell checker, required by
 [Flyspell](http://www.emacswiki.org/emacs/FlySpell):
 
 ```bash
 $ brew install aspell --with-lang-en
 ```
-
-Note that this emacs configuration automatically installs a somewhat large
-number of packages via ELPA/MELPA/Marmalade the first time emacs is
-run with it. This takes time, and there may be transient errors that
-require one to quit and restart a couple of times to get it done.
 
 ### CUSTOMIZATION
 
