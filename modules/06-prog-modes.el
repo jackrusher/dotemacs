@@ -2,7 +2,7 @@
 
 ;;; GENERAL
 
-;; weirdly not in railwaycat's emacs mac os x
+;; missing from some emacsen
 (defun newline-and-indent ()
   "Insert a newline, then indent according to major mode.
 Indentation is done using the value of `indent-line-function'.
@@ -77,9 +77,8 @@ Including indent-buffer, which should not be called automatically on save."
 ;; highlight matching parens, please
 (show-paren-mode)
 
-;;(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
-
-;; keybinding stolen from Lighttable
+;; keybinding stolen from Lighttable, which I'm told stole it from
+;; Flash.
 (global-set-key (kbd "<s-return>") 'eval-defun)
 (define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-defun)
 
@@ -129,6 +128,8 @@ Including indent-buffer, which should not be called automatically on save."
 (put 'paredit-newline 'delete-selection t)
 
 ;; SMARTPARENS
+
+;; Too frustrating are the small differences from paredit
 
 ;; (require 'smartparens)
 ;; (sp-use-paredit-bindings)
@@ -227,7 +228,6 @@ Including indent-buffer, which should not be called automatically on save."
 (setq nrepl-eval-sexp-fu-flash-duration 0.3)
 
 ;; temporary local version until package added to melpa
-
 (load "cider-eval-sexp-fu.el")
 (require 'cider-eval-sexp-fu)
 (setq cider-eval-sexp-fu-flash-duration 0.3)

@@ -53,17 +53,7 @@
 (global-set-key (kbd "s-1") 'er/expand-region)
 (global-set-key (kbd "s-2") 'er/contract-region)
 
+;; I can't get today's kids interested in set-mark, so I've repurposed
+;; C-SPC for ace-jump-mode.
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-SPC") 'ace-jump-mode)
-
-;; ;; Keep region when undoing in region (from Magnar)
-;; (defadvice undo-tree-undo (around keep-region activate)
-;;   (if (use-region-p)
-;;       (let ((m (set-marker (make-marker) (mark)))
-;;             (p (set-marker (make-marker) (point))))
-;;         ad-do-it
-;;         (goto-char p)
-;;         (set-mark m)
-;;         (set-marker p nil)
-;;         (set-marker m nil))
-;;     ad-do-it))

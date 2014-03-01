@@ -30,7 +30,8 @@
 ;; with everything else.
 (defun jackrusher-escape-quit ()
   "Quit the current action, a la C-g, and unhighlight any
-lingering search matches."
+lingering search matches. This is for users who come from an
+<escape> cancels everything culture."
   (interactive)
   (keyboard-escape-quit)
   (lazy-highlight-cleanup))
