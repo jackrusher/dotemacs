@@ -19,21 +19,21 @@
 ;; I'll be sending files from the command line
 (server-start)
 
+;;; local lisp packages for this configuration lives here
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
 ;;; LOAD MODULES
 ;;; The same approach as /etc/rc.d, all startup filenames begin with a
 ;;; number and get loaded in numerical order.
 
-(mapc
- (lambda (filename) (load-file filename))
- (directory-files (concat user-emacs-directory "modules") t "[0-9]*.el"))
+(mapc #'load-file (directory-files (concat user-emacs-directory "modules") t "[0-9]*.el"))
 
 ;;; PER-USER CUSTOMIZATIONS
 
 ;; A few people use this configuration, so here's a hook to load
-;; "<username>-local.el" if such a file exists on the load path.
+;; "~/.emacs.d/lisp/<username>-local.el" if such a file exists on the load path.
 ;; Place personal extensions to this configuration in that file to
 ;; avoid merge hassles later.
-(add-to-list 'load-path user-emacs-directory)
 (let ((per-user-file (concat user-emacs-directory (user-login-name) "-local.el")))
   (when (locate-library per-user-file) (load per-user-file)))
 

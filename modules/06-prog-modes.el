@@ -228,7 +228,7 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; temporary local version until package added to melpa
 
-(load (concat user-emacs-directory "cider-eval-sexp-fu.el"))
+(load "cider-eval-sexp-fu.el")
 (require 'cider-eval-sexp-fu)
 (setq cider-eval-sexp-fu-flash-duration 0.3)
 

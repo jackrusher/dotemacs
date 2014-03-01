@@ -50,8 +50,9 @@ $ brew install aspell --with-lang-en
 ### CUSTOMIZATION
 
 If you would like to extend this configuration, create a
-`<username>-local.el` file within your `.emacs.d` directory and that
-file will be loaded after this configuration has been initialized.
+`<username>-local.el` file within your `.emacs.d/lisp` directory and
+that file will be loaded after this configuration has been
+initialized.
 
 ## A PRIMER
 
