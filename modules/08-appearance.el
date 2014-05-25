@@ -1,7 +1,7 @@
 ;; -*- emacs-lisp -*-
 
 ;; enable sRGB colors in the Cocoa version of em
-(setq ns-use-srgb-colorspace t)
+;;(setq ns-use-srgb-colorspace t)
 
 (setq
  ;; display line & column numbers in mode-line

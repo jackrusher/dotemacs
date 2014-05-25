@@ -1,4 +1,5 @@
 (source gnu)
+(source melpa-stable)
 (source melpa)
 (source marmalade)
 
@@ -12,7 +13,7 @@
 (depends-on "caml")
 (depends-on "cider")
 (depends-on "clojure-mode")
-(depends-on "clojurescript-mode")
+;;(depends-on "clojurescript-mode")
 (depends-on "coffee-mode")
 (depends-on "color-theme")
 (depends-on "dash")
@@ -42,7 +43,7 @@
 (depends-on "markdown-mode")
 (depends-on "motion-mode")
 (depends-on "multiple-cursors")
-(depends-on "nrepl-eval-sexp-fu")
+;;(depends-on "nrepl-eval-sexp-fu")
 (depends-on "pallet")
 (depends-on "paredit")
 (depends-on "parenface-plus")

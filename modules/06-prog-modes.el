@@ -224,8 +224,8 @@ Including indent-buffer, which should not be called automatically on save."
      ;; add shift to eval the last expression, rather than the top-level one
      (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-last-expression)))
 
-(require 'nrepl-eval-sexp-fu)
-(setq nrepl-eval-sexp-fu-flash-duration 0.3)
+;;(require 'nrepl-eval-sexp-fu)
+;;(setq nrepl-eval-sexp-fu-flash-duration 0.3)
 
 ;; temporary local version until package added to melpa
 (load "cider-eval-sexp-fu.el")
