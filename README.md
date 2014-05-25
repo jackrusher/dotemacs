@@ -47,6 +47,14 @@ Once this is complete, you should also install the
 $ brew install aspell --with-lang-en
 ```
 
+And
+[The Silver Searcher](https://github.com/ggreer/the_silver_searcher),
+required by [ag](https://github.com/Wilfred/ag.el):
+
+```bash
+$ brew install ag
+```
+
 ### CUSTOMIZATION
 
 If you would like to extend this configuration, create a
@@ -137,6 +145,10 @@ regular expression query/replace with a live preview of matches and
 replacements. The latter 'query' version iterates over the matches,
 replacing ones where the user presses `space` and skipping the ones
 where the user presses `delete`.
+
+For searching across multiple files,
+[ag](https://github.com/Wilfred/ag.el) provides a simple interface
+that can be invoked with `M-x ag`.
 
 ### DELETING ("KILLING")
 

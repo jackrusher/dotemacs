@@ -9,6 +9,7 @@
 (depends-on "ac-slime")
 (depends-on "ace-jump-mode")
 (depends-on "ack-and-a-half")
+(depends-on "ag")
 (depends-on "auto-complete")
 (depends-on "caml")
 (depends-on "cider")
