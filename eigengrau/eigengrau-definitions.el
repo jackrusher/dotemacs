@@ -78,7 +78,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
     (cyan    "#99CCCC" "#9BCCCC" "#aadddd" "cyan"          "cyan")
     (white   "#ffffff" "#ffffff" "#ffffff" "white"         "white")
     (green   "#A1F6A1" "#A1F6A1" "#aaffaa" "green"         "green"))
-    ;; '((base03  "#202020" "#202020" "#202020" "brightblack"   "black")
+
+  ;; '((base03  "#202020" "#202020" "#202020" "brightblack"   "black")
     ;; (base02  "#292929" "#292929" "#292929" "black"         "black")
     ;; (base01  "#5f5f5f" "#5f5f5f" "#5f5f5f" "brightgreen"   "green")
     ;; (base00  "#999999" "#999999" "#999999" "brightyellow"  "yellow")
@@ -306,6 +307,7 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (eshell-ls-symlink ((t (,@fg-cyan))))
                       (eshell-ls-unreadable ((t (,@fg-base00))))
                       (eshell-prompt ((t (,@fmt-bold ,@fg-green))))
+
                       ;; font-lock
                       (font-lock-builtin-face ((t (,@fmt-none ,@fg-green)))) ; Statement
                       (font-lock-comment-face ((t (,@fmt-ital ,@fg-base01)))) ; Comment

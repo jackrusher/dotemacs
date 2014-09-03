@@ -23,23 +23,34 @@ column specified by the function `current-left-margin'."
 (auto-fill-mode 1)
 (setq comment-auto-fill-only-comments t)
 
-;; auto-complete-mode, completion and popup help
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(global-auto-complete-mode t)
-(setq ac-use-quick-help t
-      ac-auto-show-menu 0.0
-      ac-quick-help-delay 0.3)
-(ac-flyspell-workaround)
-(define-key ac-complete-mode-map [tab] 'ac-expand)
-(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-(diminish 'auto-complete-mode)
+;; Tired of fighting with incompatible versions of auto-complete and
+;; popup, I'm moving to company mode
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; after-load sort of hook?
+(setq company-idle-delay 0.25)
+
+;; TODO integrate more of these:
+;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
+;; more notes:
+;; http://www.emacswiki.org/emacs/CompanyMode
+
+;; XXX consider this to get ac-complete style tab completion, rather
+;; than enter completion
+;;
+;; (defun complete-or-indent ()
+;;     (interactive)
+;;     (if (company-manual-begin)
+;;         (company-complete-common)
+;;       (indent-according-to-mode)))
+
+;; XXX -- why do some completions not appear with company, but do with
+;; hippy?
 
 ;; hook AC into completion-at-point
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+;; (defun set-auto-complete-as-completion-at-point-function ()
+;;   (setq completion-at-point-functions '(auto-complete)))
+;; (add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
 ;; Various superfluous white-space: kill it
 (defun cleanup-buffer-safe ()
@@ -155,13 +166,13 @@ Including indent-buffer, which should not be called automatically on save."
 (eval-after-load 'eldoc
   '(diminish 'eldoc-mode))
 
-(defun elisp-popup-doc ()
-  "Use auto-complete's popup support to look up docs in emacs-lisp buffers."
-  (interactive)
-  (popup-tip (ac-symbol-documentation (symbol-at-point))
-             :around t
-             :scroll-bar t
-             :margin t))
+;; (defun elisp-popup-doc ()
+;;   "Use auto-complete's popup support to look up docs in emacs-lisp buffers."
+;;   (interactive)
+;;   (popup-tip (ac-symbol-documentation (symbol-at-point))
+;;              :around t
+;;              :scroll-bar t
+;;              :margin t))
 
 (define-key lisp-interaction-mode-map (kbd "C-c d") 'elisp-popup-doc)
 (define-key emacs-lisp-mode-map (kbd "C-c d") 'elisp-popup-doc)
@@ -179,42 +190,24 @@ Including indent-buffer, which should not be called automatically on save."
            (insert (current-kill 0)))))
 
 ;;; SCHEME
-
-;;;; use geiser for racket (also good for guile)
 (require 'geiser)
 (setq geiser-active-implementations '(racket))
-;; (progn
-;;   (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
-;;   (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
-;;   (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp))
-
-;; (require 'ac-geiser)
-;; (add-hook 'geiser-mode-hook 'ac-geiser-setup)
-;; (add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
-;; (eval-after-load "auto-complete"
-;;   '(add-to-list 'ac-modes 'geiser-repl-mode))
+(add-hook 'geiser-mode-hook
+          '(lambda ()
+             (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
+             (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
+             (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
 
 ;;; XXX COMMON LISP moved to private config for the moment
 
 ;;; CLOJURE
 
-;; ac-mode for clojure/cider
-(eval-after-load "auto-complete"
-  '(progn
-    (add-to-list 'ac-modes 'clojure-mode)
-	(add-to-list 'ac-modes 'cider-mode)))
-
 (eval-after-load "cider"
   '(progn
-     (require 'ac-nrepl)
-     (add-hook 'cider-mode-hook 'ac-nrepl-setup)
      (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-     (add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
-     (add-hook 'cider-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
      (add-hook 'cider-interaction-mode-hook 'cider-turn-on-eldoc-mode)
-     (add-hook 'cider-interaction-mode-hook 'ac-nrepl-setup)
-     (define-key cider-mode-map (kbd "C-c d") 'ac-nrepl-popup-doc)
-     (setq cider-popup-stacktraces nil)
+     (setq cider-repl-print-length 1000)
+     (setq cider-repl-use-clojure-font-lock t)
      (setq cider-repl-pop-to-buffer-on-connect nil)))
 
 ;; I like this keybinding from Lighttable
@@ -230,7 +223,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;; temporary local version until package added to melpa
 (load "cider-eval-sexp-fu.el")
 (require 'cider-eval-sexp-fu)
-(setq cider-eval-sexp-fu-flash-duration 0.3)
+(setq cider-eval-sexp-fu-flash-duration 0.2)
 
 ;;;;;; HASKELL 
 
@@ -246,16 +239,12 @@ Including indent-buffer, which should not be called automatically on save."
 ;; ruby, using robe
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 (add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'robe-mode-hook
-          (lambda ()
-            (add-to-list 'ac-sources 'ac-source-robe)
-            (setq completion-at-point-functions '(auto-complete))))
 
 ;; some ruby motion stuff
 (require 'motion-mode)
 (add-hook 'ruby-mode-hook 'motion-recognize-project)
-(add-to-list 'ac-modes 'motion-mode)
-(add-to-list 'ac-sources 'ac-source-dictionary)
+;;(add-to-list 'ac-modes 'motion-mode)
+;; (add-to-list 'ac-sources 'ac-source-dictionary)
 
 (define-key motion-mode-map (kbd "C-c C-c") 'motion-execute-rake)
 (define-key motion-mode-map (kbd "C-c C-d") 'motion-dash-at-point)
@@ -269,9 +258,7 @@ Including indent-buffer, which should not be called automatically on save."
 (setq-default js2-global-externs '("module" "require" "jQuery" "$" "_" "buster" "sinon" "assert" "refute" "setTimeout" "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-;; this looks great, but it currently locks emacs (!)
-;;(require 'ac-js2)
-;;(add-hook 'js2-mode-hook 'ac-js2-mode)
+;; tern for completion and such?
 
 ;; skewer mode for browser mind control
 (require 'skewer-mode)
@@ -311,4 +298,5 @@ Including indent-buffer, which should not be called automatically on save."
     (add-hook 'css-mode-hook 'rainbow-turn-on)
     (define-key css-mode-map
       [remap newline] 'newline-and-indent)))
+
 
