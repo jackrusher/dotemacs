@@ -56,3 +56,26 @@ is displayed in the mode-line."
 
 (add-hook 'markdown-mode-hook (lambda () (wordcount-mode)))
 
+;; Retain keyboard navigation in org-mode
+(require 'org)
+(eval-after-load 'org-mode
+  (dolist (binding (list (kbd "M-<up>")
+                         (kbd "M-<down>")
+                         (kbd "M-<left>")
+                         (kbd "M-<right>")
+                         (kbd "S-<up>")
+                         (kbd "S-<down>")
+                         (kbd "C-S-<up>")
+                         (kbd "C-S-<down>")
+                         (kbd "C-<up>")
+                         (kbd "C-<down>")
+                         (kbd "M-S-<left>")
+                         (kbd "M-S-<right>")
+                         (kbd "M-S-<down>")
+                         (kbd "M-S-<up>")))
+    (define-key org-mode-map binding nil)))
+
+;; Retain shift-selection in org-mode as well
+(setq org-support-shift-select 'always)
+(define-key org-mode-map [remap backward-paragraph] nil)
+(define-key org-mode-map [remap forward-paragraph] nil)
