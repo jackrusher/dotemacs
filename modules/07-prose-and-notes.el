@@ -15,7 +15,10 @@
 
 ;; I prefer my navigation keys be left alone, please.
 (eval-after-load 'markdown-mode
-  (dolist (binding (list (kbd "M-<up>") (kbd "M-<down>") (kbd "M-<left>") (kbd "M-<right>")))
+  (dolist (binding (list (kbd "M-<up>")
+                         (kbd "M-<down>")
+                         (kbd "M-<left>")
+                         (kbd "M-<right>")))
     (define-key markdown-mode-map binding nil)))
 
 ;; I like to date my diary entries in this format
@@ -79,3 +82,7 @@ is displayed in the mode-line."
 (setq org-support-shift-select 'always)
 (define-key org-mode-map [remap backward-paragraph] nil)
 (define-key org-mode-map [remap forward-paragraph] nil)
+
+(define-key org-mode-map (kbd "s->") 'org-metaright)
+(define-key org-mode-map (kbd "s-<") 'org-metaleft)
+
