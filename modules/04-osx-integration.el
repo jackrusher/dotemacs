@@ -75,3 +75,28 @@ lingering search matches. This is for users who come from an
 ;; don't use the right alt/option key as M-, so it can still be used
 ;; to type accented characters. Fück yeah.
 (setq ns-right-alternate-modifier nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RAILWAY CAT EMACS
+
+(when (string-match "Atago" (version))
+
+  ;; default railway has these the other way round
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+
+  ;; and doesn't set the default CUA bindings
+  (global-set-key [(super a)] 'mark-whole-buffer)
+  (global-set-key [(super c)] 'kill-ring-save)
+  (global-set-key [(super v)] 'yank)
+  (global-set-key [(super x)] 'kill-region)
+  (global-set-key [(super s)] 'save-buffer)
+  (global-set-key [(super l)] 'goto-line)
+  (global-set-key [(super w)]
+                  (lambda () (interactive) (delete-window)))
+  (global-set-key [(super z)] 'undo)
+
+  ;; turn off super disturbing visible bell
+  (setq visible-bell nil)
+
+  ;; does not work yet in railway cat :(
+  (setq mac-right-alternate-modifier nil))

@@ -2,18 +2,6 @@
 
 ;;; GENERAL
 
-;; missing from some emacsen
-(defun newline-and-indent ()
-  "Insert a newline, then indent according to major mode.
-Indentation is done using the value of `indent-line-function'.
-In programming language modes, this is the same as TAB.
-In some text modes, where TAB inserts a tab, this command indents to the
-column specified by the function `current-left-margin'."
-  (interactive "*")
-  (delete-horizontal-space t)
-  (newline)
-  (indent-according-to-mode))
-
 ;; four space tab stops in general, using spaces
 (setq-default tab-width 4)
 (setq c-basic-offset 4)
@@ -28,7 +16,7 @@ column specified by the function `current-left-margin'."
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; after-load sort of hook?
-(setq company-idle-delay 0.25)
+(setq company-idle-delay 0.3)
 
 ;; TODO integrate more of these:
 ;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
@@ -46,11 +34,6 @@ column specified by the function `current-left-margin'."
 
 ;; XXX -- why do some completions not appear with company, but do with
 ;; hippy?
-
-;; hook AC into completion-at-point
-;; (defun set-auto-complete-as-completion-at-point-function ()
-;;   (setq completion-at-point-functions '(auto-complete)))
-;; (add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
 ;; Various superfluous white-space: kill it
 (defun cleanup-buffer-safe ()
@@ -290,13 +273,4 @@ Including indent-buffer, which should not be called automatically on save."
 
 (require 'restclient)
 (define-key restclient-mode-map (kbd "<s-return>") 'restclient-http-send-current)
-
-;;;;;; CSS isn't really programming, but...
-
-(eval-after-load 'css-mode
-  (progn
-    (add-hook 'css-mode-hook 'rainbow-turn-on)
-    (define-key css-mode-map
-      [remap newline] 'newline-and-indent)))
-
 

@@ -6,6 +6,7 @@
 (depends-on "ace-jump-mode")
 (depends-on "ack-and-a-half")
 (depends-on "ag")
+(depends-on "aggressive-indent")
 (depends-on "bundler")
 (depends-on "caml")
 (depends-on "cider")
