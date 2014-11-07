@@ -204,8 +204,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                        (fmt-revb `(:weight ,bold  :slant normal  :underline nil        :inverse-video t))
                        (fmt-revbb `(:weight ,bright-bold :slant normal :underline nil  :inverse-video t))
                        (fmt-revbbu `(:weight ,bright-bold :slant normal  :underline ,underline :inverse-video t))
-                       (fmt-redwave `(:underline (:color ,red :style wave) :inherit default))
-                       (fmt-orangewave `(:underline (:color ,orange :style wave) :inherit default)))
+                       (fmt-redwave `(:underline (:color ,red :style wave)))
+                       (fmt-orangewave `(:underline (:color ,orange :style wave))))
                    `((;; basic
                       (default ((t (,@fg-base0 ,@bg-back)))) ; Normal
                       (cursor ((t (,@fg-base03 ,@bg-white)))) ; Cursor
@@ -388,8 +388,8 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (bm-fringe-face ((t (,@bg-orange ,@fg-base03))))
                       (bm-fringe-persistent-face ((t (,@bg-blue ,@fg-base03))))
                       ;; Flymake
-                      (flymake-errline ((t (,@fmt-redwave)))) ; ErrorMsg
-                      (flymake-warnline ((t (,@fmt-orangewave)))) ; WarningMsg
+                      (flymake-errline ((t (:background nil ,@fmt-redwave)))) ; ErrorMsg
+                      (flymake-warnline ((t (:background nil ,@fmt-orangewave)))) ; WarningMsg
                       ;; column-marker
                       (column-marker-1 ((t (,@bg-base01))))
                       (column-marker-2 ((t (,@bg-cyan))))
