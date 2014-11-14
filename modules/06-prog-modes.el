@@ -66,6 +66,10 @@ Including indent-buffer, which should not be called automatically on save."
             (font-lock-add-keywords
              nil '(("\\<\\(XXX\\|BUG\\|TODO\\)" 1 font-lock-warning-face prepend)))))
 
+;; reindent-then-newline-and-indent is bad news for python's
+;; syntactically important whitespace
+(define-key python-mode-map [remap newline] 'newline-and-indent)
+
 ;;;;;; LISPS
 
 ;; highlight matching parens, please
