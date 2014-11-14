@@ -68,7 +68,9 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; reindent-then-newline-and-indent is bad news for python's
 ;; syntactically important whitespace
-(define-key python-mode-map [remap newline] 'newline-and-indent)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (define-key python-mode-map [remap newline] 'newline-and-indent)))
 
 ;;;;;; LISPS
 
