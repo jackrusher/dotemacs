@@ -2,9 +2,9 @@
 
 (defun skewer-coffee-eval (coffee-code)
   "Requests the browser to evaluate a coffeescipt string."
-  ;; XXX should escape double quote characters
   (skewer-eval (concat "CoffeeScript.eval(\""
-                       (s-replace "\n" "\\n" (s-trim coffee-code))
+                       (s-replace "\"" "\\\""
+                                  (s-replace "\n" "\\n" (s-trim coffee-code)))
                        "\");")
                #'skewer-post-minibuffer))
 
