@@ -27,7 +27,7 @@
                  "%b"))))
 
 ;; font and spacing
-(set-default-font "Menlo-13")
+(set-frame-font "Menlo-13")
 (setq-default line-spacing 3)
 
 ;; unblinking bar-style cursor
