@@ -30,6 +30,9 @@
 (set-frame-font "Menlo-13")
 (setq-default line-spacing 3)
 
+;; color emoji support
+(set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
+
 ;; unblinking bar-style cursor
 (blink-cursor-mode 0)
 (setq default-cursor-type 'bar)
