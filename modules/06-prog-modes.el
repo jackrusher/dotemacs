@@ -193,8 +193,8 @@ Including indent-buffer, which should not be called automatically on save."
 
 (eval-after-load "cider"
   '(progn
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-     (add-hook 'cider-interaction-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'eldoc-mode)
+     (add-hook 'cider-interaction-mode-hook 'eldoc-mode)
      (setq cider-repl-print-length 1000)
      (setq cider-repl-use-clojure-font-lock t)
      (setq cider-repl-pop-to-buffer-on-connect nil)))
