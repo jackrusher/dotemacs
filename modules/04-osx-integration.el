@@ -76,9 +76,9 @@ lingering search matches. This is for users who come from an
 ;; to type accented characters. Fück yeah.
 (setq ns-right-alternate-modifier nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RAILWAY CAT EMACS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; YAMAMOTO MITSUHARU (AKA RAILWAY CAT) EMACS
 
-(when (string-match "Atago" (version))
+(when (string-match "AppKit" (version))
 
   ;; default railway has these the other way round
   (setq mac-option-modifier 'meta)
