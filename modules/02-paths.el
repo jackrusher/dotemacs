@@ -21,5 +21,5 @@
 ;;
 ;; $ defaults write $HOME/.MacOSX/environment PATH "$PATH"
 ;;
-;; ... whenever the path changes to ensure the path is availabel to
+;; ... whenever the path changes to ensure the path is available to
 ;; programs launched via Spotlight, the Dock, Finder, &c.
