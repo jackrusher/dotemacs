@@ -31,7 +31,8 @@
 (setq-default line-spacing 3)
 
 ;; color emoji support
-(set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
+(if (fboundp 'set-fontset-font)
+	(set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
 
 ;; unblinking bar-style cursor
 (blink-cursor-mode 0)
