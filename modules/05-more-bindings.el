@@ -57,3 +57,6 @@
 ;; C-SPC for ace-jump-mode.
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-SPC") 'ace-jump-mode)
+
+;; Enable which-key for function discovery
+(which-key-mode)
