@@ -65,5 +65,6 @@
 (depends-on "tuareg")
 (depends-on "undo-tree")
 (depends-on "visual-regexp")
+(depends-on "which-key")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")

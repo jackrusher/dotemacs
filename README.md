@@ -199,6 +199,12 @@ does things like:
 
 *M-x re<TAB><RET>* to complete and invoke "replace-string"
 
+Consider using the *apropos* function when you roughly know what you
+want to do, but aren't sure of the exact function that will do
+it. *M-x apropos* prompts you to enter a word (or words) related to
+what you'd like to do, and creates a buffer for you to browse various
+functions related to your search term.
+
 Emacs has a ubiquitous help system that allows one to find out the
 binding of any key, purpose of any function, and so on. Help commands
 start with ctrl-h (for help!), then a series of letters to indicate
@@ -209,6 +215,15 @@ of keystrokes, then report what function is called by that sequence;
 *ctrl-h f* (help -> describe function) will provide a similar service
 for functions using a completion interface. Function descriptions will
 also list the shortcuts keys that are bound to that function.
+
+If you have trouble remembering a particular key combination, the
+*which-key* package tries to help. If it detects a moment of
+hesitation after entering an incomplete key combination, it will show
+you a list of possible completions. For instance, in the previous
+paragraph we discussed two possible completions for *C-h*: *C-h k* to
+describe a keybinding, and *C-h f* to describe a function. You can
+discover other help functions by keying just *C-h* and reviewing the
+many possible completions.
 
 ## SOURCE CONTROL
 
