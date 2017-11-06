@@ -9,7 +9,8 @@
 
 ;; ido-mode is a work of beauty and magic
 (ido-mode t)
-(ido-ubiquitous t)
+(ido-everywhere t)
+(ido-ubiquitous-mode t)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil

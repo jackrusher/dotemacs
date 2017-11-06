@@ -36,7 +36,7 @@
 (depends-on "haml-mode")
 (depends-on "haskell-mode")
 (depends-on "highlight")
-(depends-on "ido-ubiquitous")
+(depends-on "ido-completing-read+")
 (depends-on "inf-ruby")
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
