@@ -30,27 +30,6 @@ Then install it:
 $ brew install emacs --with-gnutls --with-cocoa ./emacs.rb
 ```
 
-Next, install [Cask](http://cask.github.io/):
-
-```bash
-$ brew install cask
-```
-
-After installation, create a symlink pointing from your user directory
-to the cask folder installed by Homebrew:
-
-```bash
-$ ln -s /usr/local/Cellar/cask/`cask --version` ~/.cask
-```
-
-Now change to your `.emacs.d` directory and use `cask` to install the
-package dependencies:
-
-```bash
-$ cd ~/.emacs.d
-$ cask install
-```
-
 Once this is complete, you should also install the
 [Aspell](http://aspell.net/) spell checker, required by
 [Flyspell](http://www.emacswiki.org/emacs/FlySpell):
