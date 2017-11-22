@@ -35,7 +35,7 @@
 
 ;;; Like /etc/rc.d, all startup filenames begin with a number and get
 ;;; loaded in numerical order.
-(mapc #'load-file (directory-files (concat user-emacs-directory "modules") t "[0-9]*.el"))
+(mapc #'load-file (directory-files (concat user-emacs-directory "modules") t "[0-9]*.el$"))
 
 ;;; PER-USER CUSTOMIZATIONS
 
