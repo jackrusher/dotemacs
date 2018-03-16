@@ -197,7 +197,8 @@ Including indent-buffer, which should not be called automatically on save."
      (add-hook 'cider-interaction-mode-hook 'eldoc-mode)
      (setq cider-repl-print-length 1000)
      (setq cider-repl-use-clojure-font-lock t)
-     (setq cider-repl-pop-to-buffer-on-connect nil)))
+     (setq cider-repl-pop-to-buffer-on-connect nil)
+     (setq nrepl-use-ssh-fallback-for-remote-hosts 't)))
 
 ;; I like this keybinding from Lighttable
 (eval-after-load 'clojure-mode
