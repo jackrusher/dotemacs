@@ -16,21 +16,11 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; after-load sort of hook?
-(setq company-idle-delay 0.3)
+(setq company-idle-delay 0.2)
 
-;; TODO integrate more of these:
-;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
-;; more notes:
-;; http://www.emacswiki.org/emacs/CompanyMode
-
-;; XXX consider this to get ac-complete style tab completion, rather
-;; than enter completion
-;;
-;; (defun complete-or-indent ()
-;;     (interactive)
-;;     (if (company-manual-begin)
-;;         (company-complete-common)
-;;       (indent-according-to-mode)))
+;; pop-up help for company mode
+;; (company-quickhelp-mode 1)
+;; (setq company-quickhelp-delay 0.3)
 
 ;; XXX -- why do some completions not appear with company, but do with
 ;; hippy?
@@ -79,12 +69,16 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; keybinding stolen from Lighttable, which I'm told stole it from
 ;; Flash.
-(global-set-key (kbd "<s-return>") 'eval-defun)
-(define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-defun)
+(global-set-key (kbd "<s-return>") 'eval-last-sexp)
+(define-key emacs-lisp-mode-map (kbd "<s-return>") 'eval-last-sexp)
 
 ;; ... add shift to eval last expression
-(global-set-key (kbd "<S-s-return>") 'eval-last-sexp)
-(define-key emacs-lisp-mode-map (kbd "<S-s-return>") 'eval-last-sexp)
+(global-set-key (kbd "<S-s-return>") 'eval-defun)
+(define-key emacs-lisp-mode-map (kbd "<S-s-return>") 'eval-defun)
+
+;; pretty print!
+(define-key emacs-lisp-mode-map (kbd "C-c C-p") 'pp-eval-last-sexp)
+(define-key lisp-interaction-mode-map (kbd "C-c C-p") 'pp-eval-last-sexp)
 
 ;;; PAREDIT
 
@@ -184,8 +178,9 @@ Including indent-buffer, which should not be called automatically on save."
 (add-hook 'geiser-mode-hook
           '(lambda ()
              (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
-             (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-definition)
-             (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-last-sexp)))
+             (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-last-sexp)
+             (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-definition)
+             (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-buffer)))
 
 ;;; XXX COMMON LISP moved to private config for the moment
 
@@ -193,24 +188,23 @@ Including indent-buffer, which should not be called automatically on save."
 
 (eval-after-load "cider"
   '(progn
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-     (add-hook 'cider-interaction-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'eldoc-mode)
+     (add-hook 'cider-interaction-mode-hook 'eldoc-mode)
      (setq cider-repl-print-length 1000)
      (setq cider-repl-use-clojure-font-lock t)
-     (setq cider-repl-pop-to-buffer-on-connect nil)))
+     (setq cider-repl-pop-to-buffer-on-connect nil)
+     (setq cider-use-overlays nil)))
 
 ;; I like this keybinding from Lighttable
 (eval-after-load 'clojure-mode
   '(progn
-     (define-key clojure-mode-map (kbd "<s-return>") 'cider-eval-defun-at-point)
+     (define-key clojure-mode-map (kbd "<s-return>") 'cider-eval-last-sexp)
      ;; add shift to eval the last expression, rather than the top-level one
-     (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-last-expression)))
+     (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-defun-at-point)
+     (define-key clojure-mode-map (kbd "<C-S-s-return>") 'cider-eval-buffer)
+     (add-to-list 'auto-mode-alist '("\\.edn\\'" . clojure-mode))
+     (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))))
 
-;;(require 'nrepl-eval-sexp-fu)
-;;(setq nrepl-eval-sexp-fu-flash-duration 0.3)
-
-;; temporary local version until package added to melpa
-(load "cider-eval-sexp-fu.el")
 (require 'cider-eval-sexp-fu)
 (setq cider-eval-sexp-fu-flash-duration 0.2)
 
@@ -260,8 +254,8 @@ Including indent-buffer, which should not be called automatically on save."
     (httpd-start)
     (message "Ready to skewer the browser. Now jack in with the bookmarklet.")))
 
-(define-key skewer-mode-map (kbd "<s-return>") 'skewer-eval-defun)
-(define-key skewer-mode-map (kbd "<S-s-return>") 'skewer-eval-last-expression)
+(define-key skewer-mode-map (kbd "<s-return>") 'skewer-eval-last-expression)
+(define-key skewer-mode-map (kbd "<S-s-return>") 'skewer-eval-defun)
 
 ;; Bookmarklet to connect to skewer from the browser:
 ;; javascript:(function(){var d=document ;var s=d.createElement('script');s.src='http://localhost:8023/skewer';d.body.appendChild(s);})()

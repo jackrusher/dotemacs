@@ -14,7 +14,7 @@
  ;; general look and feel things
  font-lock-maximum-decoration t
  color-theme-is-global t
- visible-bell t
+ visible-bell nil
  truncate-partial-width-windows nil)
 
 ;; Show me empty lines after buffer end
@@ -27,8 +27,8 @@
                  "%b"))))
 
 ;; font and spacing
-(set-frame-font "Menlo-13")
-(setq-default line-spacing 3)
+(set-frame-font "Menlo-14")
+(setq-default line-spacing 4)
 
 ;; color emoji support
 (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)

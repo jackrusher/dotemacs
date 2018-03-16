@@ -1,12 +1,8 @@
-;;; This is a fork of noctilux
-;;; <https://github.com/stafu/noctilux-theme> that will diverge
-;;; much further with time.
-
 (eval-when-compile
   (require 'cl))
 
 (defconst eigengrau-description
-  "A Light Table inspired color theme based on Solarized's definitions.")
+  "A dark color theme based on Solarized's definitions as implemented by Noctilux.")
 
 (defcustom eigengrau-degrade nil
   "For test purposes only; when in GUI mode, forces Eigengrau to use the 256
@@ -43,10 +39,11 @@ down in order to expand or compress the tonal range displayed."
   :options '(high normal low)
   :group 'lt)
 
+;; I think this bug is fixed now, testing...
 (defcustom eigengrau-broken-srgb
   (if (and (eq system-type 'darwin)
            (eq window-system 'ns))
-      t
+      nil ;t
     nil)
   "Emacs bug #8402 results in incorrect color handling on Macs. If this is t
 \(the default on Macs), Eigengrau works around it with alternative colors.
@@ -79,23 +76,6 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
     (white   "#ffffff" "#ffffff" "#ffffff" "white"         "white")
     (green   "#A1F6A1" "#A1F6A1" "#aaffaa" "green"         "green"))
 
-  ;; '((base03  "#202020" "#202020" "#202020" "brightblack"   "black")
-    ;; (base02  "#292929" "#292929" "#292929" "black"         "black")
-    ;; (base01  "#5f5f5f" "#5f5f5f" "#5f5f5f" "brightgreen"   "green")
-    ;; (base00  "#999999" "#999999" "#999999" "brightyellow"  "yellow")
-    ;; (base0   "#cccccc" "#cccccc" "#cccccc" "brightblue"    "blue")
-    ;; (base1   "#aaaaaa" "#aaaaaa" "#aaaaaa" "brightcyan"    "cyan")
-    ;; (base2   "#e9e2cb" "#e9e2cb" "#e9e2cb" "white"         "white")
-    ;; (base3   "#fcf4dc" "#fcf4dc" "#fcf4dc" "brightwhite"   "white")
-    ;; (yellow  "#aaeecc" "#aaeecc" "#aaeecc" "yellow"        "yellow")
-    ;; (orange  "#ff8888" "#ff8888" "#ff8888" "brightred"     "red")
-    ;; (red     "#ff3333" "#ff3333" "#ff3333" "red"           "red")
-    ;; (magenta "#FF1F69" "#FF1F69" "#FF1F69" "magenta"       "magenta")
-    ;; (violet  "#ccaaff" "#ccaaff" "#ccaaff" "brightmagenta" "magenta")
-    ;; (blue    "#aaccff" "#aaccff" "#aaccff" "blue"          "blue")
-    ;; (cyan    "#aadddd" "#aadddd" "#aadddd" "cyan"          "cyan")
-    ;; (white   "#ffffff" "#ffffff" "#ffffff" "white"          "white")
-    ;; (green   "#aaffaa" "#aaffaa" "#aaffaa" "green"         "green"))
   "This is a table of all the colors used by the Eigengrau color theme. Each
    column is a different set, one of which will be chosen based on term
    capabilities, etc.")
@@ -147,6 +127,7 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                        ((eq 'low eigengrau-contrast)
                         (setf back      base02
                               opt-under t)))
+                 
                  ;; NOTE: We try to turn an 8-color term into a 10-color term by not
                  ;;       using default background and foreground colors, expecting the
                  ;;       user to have the right colors set for them.
@@ -195,10 +176,10 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                        (fmt-undb `(:weight ,bold  :slant normal  :underline ,underline :inverse-video nil))
                        (fmt-undi `(:weight normal                :underline ,underline :inverse-video nil))
                        (fmt-uopt `(:weight normal :slant normal  :underline ,opt-under :inverse-video nil))
-                       ;; FIXME: not quite the same
+                       ;; XXX: not quite the same
                        (fmt-curl `(:weight normal :slant normal  :underline t          :inverse-video nil))
                        (fmt-ital `(:weight normal :slant ,italic :underline nil        :inverse-video nil))
-                       ;; FIXME: not quite the same
+                       ;; XXX: not quite the same
                        (fmt-stnd `(:weight normal :slant normal  :underline nil        :inverse-video t))
                        (fmt-revr `(:weight normal :slant normal  :underline nil        :inverse-video t))
                        (fmt-revb `(:weight ,bold  :slant normal  :underline nil        :inverse-video t))
@@ -568,7 +549,7 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (clojure-test-error-face ((t (:background nil :inherit flymake-errline))))
                       (clojure-test-success-face ((t (:background nil :foreground nil :underline ,green))))
                       
-                      ;; For Brian Carper's extended clojure syntax table
+                      ;; Brian Carper's extended clojure syntax table
                       (clojure-keyword ((t (,@fg-yellow))))
                       (clojure-parens ((t (,@fg-base01))))
                       (clojure-braces ((t (,@fg-violet))))
@@ -576,12 +557,14 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                       (clojure-special ((t (,@fg-blue))))
                       (clojure-java-call ((t (,@fg-violet))))
 
+                      ;; XXX explicit color(s) here should be named
+
                       ;; eval-sexp-fu flashes
                       (eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
                       (nrepl-eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
-                      (nrepl-error-highlight-face ((t (:background "black" :foreground "red" :underline t))))
+                      (nrepl-error-highlight-face ((t (:background "black" :foreground ,red :underline t))))
                       (cider-eval-sexp-fu-flash ((t (:background "#0A414C" :foreground "#84FBFF"))))
-                      (cider-error-highlight-face ((t (:background "black" :foreground "red" :underline t))))
+                      (cider-error-highlight-face ((t (:background "black" :foreground ,red :underline t))))
 
                       ;; ace-jump-mode highlights like sexp-fu flashes
                       (ace-jump-face-foreground ((t (:background "#0A414C" :foreground "#84FBFF")))))

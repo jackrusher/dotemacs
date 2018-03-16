@@ -18,7 +18,11 @@
   (dolist (binding (list (kbd "M-<up>")
                          (kbd "M-<down>")
                          (kbd "M-<left>")
-                         (kbd "M-<right>")))
+                         (kbd "M-<right>")
+                         (kbd "<M-S-left>")
+                         (kbd "<M-S-right>")
+                         (kbd "<M-S-up>")
+                         (kbd "<M-S-down>")))
     (define-key markdown-mode-map binding nil)))
 
 ;; I like to date my diary entries in this format

@@ -25,18 +25,6 @@
 ;; fn+option+delete = kill word to the right in OS X inputs
 (define-key global-map (kbd "<M-kp-delete>") 'paredit-forward-kill-word)
 
-;; ESC is normally used to begin certain control sequences in emacs,
-;; but universally used for 'quit' by everything else. This normalizes
-;; with everything else.
-(defun jackrusher-escape-quit ()
-  "Quit the current action, a la C-g, and unhighlight any
-lingering search matches. This is for users who come from an
-<escape> cancels everything culture."
-  (interactive)
-  (keyboard-escape-quit)
-  (lazy-highlight-cleanup))
-(global-set-key (kbd "<escape>") 'jackrusher-escape-quit)
-
 ;; undo-tree-mode aliased to command+z/shift+command+z
 (require 'undo-tree)
 (global-undo-tree-mode 1)
@@ -78,25 +66,26 @@ lingering search matches. This is for users who come from an
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; RAILWAY CAT EMACS
 
-(when (string-match "Atago" (version))
+;; default railway has these the other way round
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
 
-  ;; default railway has these the other way round
-  (setq mac-option-modifier 'meta)
-  (setq mac-command-modifier 'super)
+;; and doesn't set the default CUA bindings
+(global-set-key [(super a)] 'mark-whole-buffer)
+(global-set-key [(super c)] 'kill-ring-save)
+(global-set-key [(super g)] 'isearch-repeat-forward)
+(global-set-key [(super l)] 'goto-line)
+(global-set-key [(super q)] 'save-buffers-kill-terminal)
+(global-set-key [(super s)] 'save-buffer)
+(global-set-key [(super v)] 'yank)
+(global-set-key [(super x)] 'kill-region)
+(global-set-key [(super w)] (lambda ()
+                              (interactive)
+                              (kill-buffer (current-buffer))))
+(global-set-key [(super z)] 'undo)
 
-  ;; and doesn't set the default CUA bindings
-  (global-set-key [(super a)] 'mark-whole-buffer)
-  (global-set-key [(super c)] 'kill-ring-save)
-  (global-set-key [(super v)] 'yank)
-  (global-set-key [(super x)] 'kill-region)
-  (global-set-key [(super s)] 'save-buffer)
-  (global-set-key [(super l)] 'goto-line)
-  (global-set-key [(super w)]
-                  (lambda () (interactive) (delete-window)))
-  (global-set-key [(super z)] 'undo)
+;; turn off super disturbing visible bell
+(setq visible-bell nil)
 
-  ;; turn off super disturbing visible bell
-  (setq visible-bell nil)
-
-  ;; does not work yet in railway cat :(
-  (setq mac-right-alternate-modifier nil))
+;; does not work yet in railway cat :(
+(setq mac-right-alternate-modifier nil)
