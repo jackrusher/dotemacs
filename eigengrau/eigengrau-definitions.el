@@ -471,6 +471,7 @@ the \"Gen RGB\" column in eigengrau-definitions.el to improve them further."
                        ((t (,@fmt-none ,@fg-blue))))
                       (gnus-summary-selected ; indicator
                        ((t (,@fmt-none ,@fg-base03 ,@bg-yellow))))
+                      (markdown-code-face ((t (:background nil))))
                       ;; Message
                       (message-mml ((t (,@fg-blue))))
                       (message-cited-text ((t (,@fg-base2))))

@@ -6,3 +6,7 @@ elpa
 ido.last
 recentf
 *-local.el
+tramp
+semanticdb
+eshell
+smex-items

@@ -193,6 +193,7 @@ Including indent-buffer, which should not be called automatically on save."
      (setq cider-repl-print-length 1000)
      (setq cider-repl-use-clojure-font-lock t)
      (setq cider-repl-pop-to-buffer-on-connect nil)
+     (setq nrepl-use-ssh-fallback-for-remote-hosts 't)
      (setq cider-use-overlays nil)))
 
 ;; I like this keybinding from Lighttable

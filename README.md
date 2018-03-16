@@ -11,32 +11,23 @@ available via the ELPA-compatible repositories.
 If you would like to test out this configuration, clone this repo and
 place it in your home directory as the directory `.emacs.d`.
 
-I install emacs on Mac OS X using this
-[homebrew](http://brew.sh/) recipe:
+I install emacs on Mac OS X using [homebrew](http://brew.sh/). Note
+that the current formula has been updated to install Emacs 25 and the
+git history no longer includes the commit for 24.5. Until this
+configuration is made compatibly with it, you'll need to update the
+formula to install 24.5 by copying
+`/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/emacs.rb`
+and updating the `url` and `sha256` to:
 
-```bash
-$ brew install emacs --HEAD --use-git-head --cocoa
+``` ruby
+  url "https://ftp.gnu.org/gnu/emacs/emacs-24.5.tar.xz"
+  sha256 "dd47d71dd2a526cf6b47cb49af793ec2e26af69a0951cc40e43ae290eacfc34e"
 ```
 
-Next, install [Cask](http://cask.github.io/):
+Then install it:
 
 ```bash
-$ brew install cask
-```
-
-After installation, create a symlink pointing from your user directory
-to the cask folder installed by Homebrew:
-
-```bash
-$ ln -s /usr/local/Cellar/cask/`cask --version` ~/.cask
-```
-
-Now change to your `.emacs.d` directory and use `cask` to install the
-package dependencies:
-
-```bash
-$ cd ~/.emacs.d
-$ cask install
+$ brew install emacs --with-gnutls --with-cocoa ./emacs.rb
 ```
 
 Once this is complete, you should also install the
@@ -74,7 +65,7 @@ The usual OSX command key bindings are mostly supported. Command-S
 saves, Command-F "finds" (searches forward), cut and paste, selection,
 and so on all operate normally. Some commands are modified so that
 they're the emacs semantic equivalent of their OS X counterparts. For
-example, Command-w "kills" (closes) the current buffer rather the
+example, Command-w "kills" (closes) the current buffer rather than the
 window (which should be full-screen most of the time).
 
 The emacs notation for key sequences looks like `a` (press a), `C-c`
@@ -187,6 +178,12 @@ does things like:
 
 *M-x re<TAB><RET>* to complete and invoke "replace-string"
 
+Consider using the *apropos* function when you roughly know what you
+want to do, but aren't sure of the exact function that will do
+it. *M-x apropos* prompts you to enter a word (or words) related to
+what you'd like to do, and creates a buffer for you to browse various
+functions related to your search term.
+
 Emacs has a ubiquitous help system that allows one to find out the
 binding of any key, purpose of any function, and so on. Help commands
 start with ctrl-h (for help!), then a series of letters to indicate
@@ -197,6 +194,15 @@ of keystrokes, then report what function is called by that sequence;
 *ctrl-h f* (help -> describe function) will provide a similar service
 for functions using a completion interface. Function descriptions will
 also list the shortcuts keys that are bound to that function.
+
+If you have trouble remembering a particular key combination, the
+*which-key* package tries to help. If it detects a moment of
+hesitation after entering an incomplete key combination, it will show
+you a list of possible completions. For instance, in the previous
+paragraph we discussed two possible completions for *C-h*: *C-h k* to
+describe a keybinding, and *C-h f* to describe a function. You can
+discover other help functions by keying just *C-h* and reviewing the
+many possible completions.
 
 ## SOURCE CONTROL
 

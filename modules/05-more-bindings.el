@@ -9,7 +9,8 @@
 
 ;; ido-mode is a work of beauty and magic
 (ido-mode t)
-(ido-ubiquitous t)
+(ido-everywhere t)
+(ido-ubiquitous-mode t)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil
@@ -57,3 +58,12 @@
 ;; C-SPC for ace-jump-mode.
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-SPC") 'ace-jump-mode)
+
+;; Enable which-key for function discovery
+(which-key-mode)
+
+;; Multiple cursors magic
+(global-set-key (kbd "C-,") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
