@@ -36,6 +36,7 @@
 
 ;; command-f, the default OSX search keybinding, but with regexp
 (global-set-key (kbd "s-f") 'isearch-forward-regexp)
+(global-set-key (kbd "s-g") 'isearch-repeat-forward)
 
 ;; command-r, forward-replace
 (require 'visual-regexp)
