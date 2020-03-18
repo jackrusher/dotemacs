@@ -15,7 +15,6 @@
 
 (package-install 'use-package) ;; (if this fails, e.g. because it can't find such-and-such version, try manually executing `package-refresh-contents`)
 
-
 ;;;; Packages we require
 ;;;; - Listed alphabetically
 ;;;; - Line breaks
@@ -31,11 +30,10 @@
 (use-package cider
   :ensure t
   :pin melpa-stable)
-(use-package cider-eval-sexp-fu :ensure t)
+(use-package cider-eval-sexp-fu   :ensure t)
 
 (use-package clojure-mode         :ensure t)
 (use-package coffee-mode          :ensure t)
-(use-package color-theme          :ensure t)
 (use-package company              :ensure t)
 (use-package company-ghc          :ensure t)
 (use-package company-inf-ruby     :ensure t)
