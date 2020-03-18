@@ -48,7 +48,7 @@
 ;; enhanced completion library, same as inputrc binding
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-(global-set-key (kbd "M-s o") 'occur)
+(global-set-key (kbd "M-s-o") 'occur)
 
 ;; expand-region is super handy! I like having expand- and contract-
 ;; side by side within easy reach.
