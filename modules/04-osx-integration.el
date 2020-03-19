@@ -56,12 +56,15 @@
 
 ;; I never want to see the OS file finder
 (require 'find-file-in-project)
-(global-set-key (kbd "s-o") 'find-file-in-project)
+(global-set-key (kbd "s-o") 'find-file-in-project-by-selected)
+
+;; but why would you ever quit emacs?
+(global-set-key (kbd "s-q") 'save-buffers-kill-emacs)
 
 ;; In dired, move deletions to trash
 (setq delete-by-moving-to-trash t)
 
-;; don't use the right alt/option key as M-, so it can still be used
+;; don't use the right alt/option key as meta, so it can still be used
 ;; to type accented characters. Fück yeah.
 (setq ns-right-alternate-modifier nil)
 
@@ -80,8 +83,7 @@
   (global-set-key [(super x)] 'kill-region)
   (global-set-key [(super s)] 'save-buffer)
   (global-set-key [(super l)] 'goto-line)
-  (global-set-key [(super w)]
-                  (lambda () (interactive) (delete-window)))
+  (global-set-key [(super w)] 'kill-this-buffer)
   (global-set-key [(super z)] 'undo)
 
   ;; turn off super disturbing visible bell

@@ -13,7 +13,7 @@ place it in your home directory as the directory `.emacs.d`.
 
 You will, of course, also need to install emacs itself. I prefer
 YAMAMOTO Mitsuharu's Mac port, also called the _railwaycat_ version,
-which I install on using [homebrew](http://brew.sh/).
+which I install using [homebrew](http://brew.sh/).
 
 ```bash
 $ brew install emacs-mac --with-xml2 --with-imagemagick --with-modern-icon --with-modules
