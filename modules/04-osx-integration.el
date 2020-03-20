@@ -28,7 +28,7 @@
 ;; undo-tree-mode aliased to command+z/shift+command+z
 (require 'undo-tree)
 (global-undo-tree-mode 1)
-(global-set-key (kbd "s-z") 'undo)           
+(global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-Z") 'undo-tree-redo)
 
 ;; the fantastic undo-tree-visualize on C-s-z
@@ -60,6 +60,9 @@
 
 ;; but why would you ever quit emacs?
 (global-set-key (kbd "s-q") 'save-buffers-kill-emacs)
+
+;; the ESC key behavior everyone expects
+(global-set-key (kbd "<escape>") 'keyboard-quit)
 
 ;; In dired, move deletions to trash
 (setq delete-by-moving-to-trash t)
