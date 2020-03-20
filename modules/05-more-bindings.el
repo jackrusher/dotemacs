@@ -69,3 +69,6 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; a suggested binding from Sublime/Atom/&c
+(global-set-key (kbd "s-d") 'mc/mark-all-like-this)
