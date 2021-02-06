@@ -1,5 +1,5 @@
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-lib))
 
 (defconst eigengrau-description
   "A dark color theme based on Solarized's definitions as implemented by Noctilux.")

@@ -180,7 +180,7 @@ Including indent-buffer, which should not be called automatically on save."
              (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
              (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-last-sexp)
              (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-definition)
-             (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-buffer)))
+             (define-key geiser-mode-map (kbd "<C-S-s-return>") 'geiser-eval-buffer)))
 
 ;;; XXX COMMON LISP moved to private config for the moment
 

@@ -8,7 +8,7 @@
 
 
 ;;;; We need the `use-package` package before we use `use-package` to use all our packages
-(package-initialize)
+(when (version< emacs-version "27.0") (package-initialize))
 
 (unless (file-exists-p (expand-file-name "archives/melpa" package-user-dir))
   (package-refresh-contents))

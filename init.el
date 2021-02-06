@@ -8,7 +8,7 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
              '("org" . "http://orgmode.org/elpa/"))
-(package-initialize)
+(when (version< emacs-version "27.0") (package-initialize))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
