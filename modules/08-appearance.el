@@ -43,29 +43,33 @@
 (mapc (lambda (m) (add-hook m (lambda () (push '("fn" . ?ƒ) prettify-symbols-alist))))
       '(clojure-mode-hook clojurescript-mode-hook))
 
-;; diminish global minor modes
-(eval-after-load 'undo-tree
-  '(diminish 'undo-tree-mode))
+(require 'doom-themes)
+(require 'doom-modeline)
+(load-theme 'doom-eigengrau t)
 
-;; locally hacked version of noctilux, turning into something else
-(add-to-list 'load-path (concat user-emacs-directory "eigengrau/"))
-(require 'eigengrau-theme)
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
 
-;; powerline gives a much aesthetically improved mode line
-(require 'powerline)
-(powerline-center-theme)
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
 
-;; dim the parentheses
-(require 'parenface-plus)
-(set-face-foreground 'paren-face "#666")
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t     ; if nil, bold is universally disabled
+      doom-themes-enable-italic t)  ; if nil, italics is universally disabled
+
+(doom-modeline-mode t)
+
+;; dim the parentheses TODO
+;; (require 'parenface-plus)
+;; (set-face-foreground 'paren-face "#666")
 
 ;; customize company-mode's popup
-(let ((bg (face-attribute 'default :background)))
-    (custom-set-faces
-     `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-     `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-     `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-     `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-     `(company-tooltip-common-selection ((t (:inherit font-lock-keyword-face))))
-     `(company-tooltip-selection ((t (:inherit font-lock-keyword-face))))))
+;; (let ((bg (face-attribute 'default :background)))
+;;     (custom-set-faces
+;;      `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+;;      `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+;;      `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+;;      `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+;;      `(company-tooltip-common-selection ((t (:inherit font-lock-keyword-face))))
+;;      `(company-tooltip-selection ((t (:inherit font-lock-keyword-face))))))
 
