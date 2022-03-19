@@ -26,13 +26,9 @@
 (define-key global-map (kbd "<M-kp-delete>") 'paredit-forward-kill-word)
 
 ;; undo-tree-mode aliased to command+z/shift+command+z
-(require 'undo-tree)
-(global-undo-tree-mode 1)
-(global-set-key (kbd "s-z") 'undo)
-(global-set-key (kbd "s-Z") 'undo-tree-redo)
-
-;; the fantastic undo-tree-visualize on C-s-z
-(global-set-key [C-s-268632090] 'undo-tree-visualize)
+(require 'undo-fu)
+(global-set-key (kbd "s-z") 'undo-fu-only-undo)
+(global-set-key (kbd "s-Z") 'undo-fu-only-redo)
 
 ;; command-f, the default OSX search keybinding, but with regexp
 (global-set-key (kbd "s-f") 'isearch-forward-regexp)
