@@ -1,102 +1,107 @@
-;; FIXME might want to `add-to-list` instead
+;; -*- emacs-lisp -*- -*- lexical-binding: t; -*-
+
 (setq package-archives
       '(("gnu"          . "https://elpa.gnu.org/packages/")
-        ("marmalade"    . "https://marmalade-repo.org/packages/")
         ("melpa"        . "https://melpa.org/packages/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org"          . "http://orgmode.org/elpa/"))) ;; no https :(
 
+(package-initialize)
 
-;;;; We need the `use-package` package before we use `use-package` to use all our packages
-(when (version< emacs-version "27.0") (package-initialize))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-(unless (file-exists-p (expand-file-name "archives/melpa" package-user-dir))
-  (package-refresh-contents))
+(eval-and-compile
+  (setq use-package-always-ensure t
+        use-package-expand-minimally t))
 
-(package-install 'use-package) ;; (if this fails, e.g. because it can't find such-and-such version, try manually executing `package-refresh-contents`)
+(eval-and-compile
+ (require 'use-package))
 
-;;;; Packages we require
-;;;; - Listed alphabetically
-;;;; - Line breaks
-;;;;   - every 10 packages, or
-;;;;   - if the package requires special config (e.g. pinning to a particular archive)
-(use-package ace-jump-mode     :ensure t)
-(use-package ack-and-a-half    :ensure t)
-(use-package ag                :ensure t)
-(use-package aggressive-indent :ensure t)
-(use-package bundler           :ensure t)
-(use-package caml              :ensure t)
+;;;; Install straight
+;; (defvar bootstrap-version)
 
-(use-package cider
-  :ensure t
-  :pin melpa-stable)
-(use-package cider-eval-sexp-fu   :ensure t)
+;; (let ((install-url "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el")
+;;       (bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;;       (bootstrap-version 5))
+;;   (unless (file-exists-p bootstrap-file)
+;;     (with-current-buffer (url-retrieve-synchronously install-url 'silent 'inhibit-cookies)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp)))
+;;   (load bootstrap-file nil 'nomessage))
 
-(use-package clojure-mode         :ensure t)
-(use-package coffee-mode          :ensure t)
-(use-package company              :ensure t)
-(use-package company-ghc          :ensure t)
-(use-package company-inf-ruby     :ensure t)
-(use-package company-go           :ensure t)
-(use-package dash                 :ensure t)
-(use-package diminish             :ensure t)
-(use-package docker-tramp         :ensure t)
+;; ;;;; Tell it to hook into use-package
+;; (straight-use-package 'use-package)
+;; (setq straight-use-package-by-default t)
 
-(use-package elisp-slime-nav      :ensure t)
-(use-package epl                  :ensure t)
-(use-package expand-region        :ensure t)
-(use-package find-file-in-project :ensure t)
-(use-package flymake-coffee       :ensure t)
-(use-package flymake-cursor       :ensure t)
-(use-package flymake-easy         :ensure t)
-(use-package flymake-ruby         :ensure t)
-(use-package fringe-helper        :ensure t)
-(use-package geiser               :ensure t)
+;; ;;;; Create a version file if it does not yet exist
+;; (when (not (file-exists-p (expand-file-name "straight/versions/default.el" straight-base-dir)))
+;;   (straight-freeze-versions))
 
-(use-package git-commit           :ensure t)
-(use-package go-mode              :ensure t)
-(use-package haml-mode            :ensure t)
-(use-package haskell-mode         :ensure t)
-(use-package highlight            :ensure t)
-(use-package ido-completing-read+ :ensure t)
-(use-package inf-ruby             :ensure t)
-(use-package js2-mode             :ensure t)
-(use-package js2-refactor         :ensure t)
-(use-package json-mode            :ensure t)
+;;; Packages we require
+(use-package ace-jump-mode)
+(use-package ag)
+(use-package aggressive-indent)
+(use-package all-the-icons)
+(use-package bundler)
+(use-package caml)
 
-(use-package magit                :ensure t)
-(use-package markdown-mode        :ensure t)
-(use-package motion-mode          :ensure t)
-(use-package multiple-cursors     :ensure t)
+;; clojure stuff
+(use-package clojure-mode)
+(use-package cider :pin melpa-stable)
+(use-package cider-eval-sexp-fu)
 
-(use-package org
-  :ensure t
-  :pin org)
+;; completion plugins
+(use-package company)
+;;(use-package company-ghc)
+(use-package company-inf-ruby)
+(use-package company-go)
 
-(use-package pallet          :ensure t)
-(use-package paredit         :ensure t)
-(use-package parenface-plus  :ensure t)
-(use-package pkg-info        :ensure t)
-(use-package powerline       :ensure t)
-(use-package pretty-symbols  :ensure t)
-(use-package processing-mode :ensure t)
-(use-package rainbow-mode    :ensure t)
-(use-package restclient      :ensure t)
-(use-package robe            :ensure t)
-
-(use-package s               :ensure t)
-(use-package simple-httpd    :ensure t)
-(use-package skewer-mode     :ensure t)
-(use-package slime-company   :ensure t)
-(use-package smartparens     :ensure t)
-(use-package smex            :ensure t)
-(use-package tuareg          :ensure t)
-(use-package typopunct       :ensure t)
-(use-package undo-tree       :ensure t)
-
-(use-package uuid            :ensure t)
-(use-package visual-regexp   :ensure t)
-(use-package web-mode        :ensure t)
-(use-package which-key       :ensure t)
-(use-package yaml-mode       :ensure t)
-(use-package yasnippet       :ensure t)
+(use-package dash)
+(use-package diminish)
+(use-package docker-tramp)
+(use-package doom-themes)
+(use-package doom-modeline)
+(use-package elisp-slime-nav)
+(use-package expand-region)
+(use-package find-file-in-project)
+(use-package flymake-cursor)
+(use-package flymake-easy)
+(use-package flymake-ruby)
+(use-package fringe-helper)
+(use-package geiser)
+(use-package git-commit)
+(use-package go-mode)
+(use-package haml-mode)
+(use-package haskell-mode)
+(use-package highlight)
+(use-package ido-completing-read+)
+(use-package inf-ruby)
+(use-package js2-mode)
+(use-package js2-refactor)
+(use-package json-mode)
+(use-package magit)
+(use-package markdown-mode)
+(use-package multiple-cursors)
+(use-package org :pin org)
+(use-package paredit)
+(use-package pkg-info)
+(use-package pretty-symbols)
+(use-package rainbow-mode)
+(use-package restclient)
+(use-package robe)
+(use-package s)
+(use-package simple-httpd)
+(use-package slime-company)
+(use-package smartparens)
+(use-package smex)
+(use-package tuareg)
+;;(use-package typopunct)
+(use-package undo-fu)
+(use-package uuid)
+(use-package visual-regexp)
+(use-package web-mode)
+(use-package which-key)
+(use-package yaml-mode)
+(use-package yasnippet)
