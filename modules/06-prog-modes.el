@@ -224,16 +224,6 @@ Including indent-buffer, which should not be called automatically on save."
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 (add-hook 'ruby-mode-hook 'robe-mode)
 
-;; some ruby motion stuff
-(require 'motion-mode)
-(add-hook 'ruby-mode-hook 'motion-recognize-project)
-;;(add-to-list 'ac-modes 'motion-mode)
-;; (add-to-list 'ac-sources 'ac-source-dictionary)
-
-(define-key motion-mode-map (kbd "C-c C-c") 'motion-execute-rake)
-(define-key motion-mode-map (kbd "C-c C-d") 'motion-dash-at-point)
-(define-key motion-mode-map (kbd "C-c C-p") 'motion-convert-code-region)
-
 ;;;;;; JAVASCRIPT/COFFEESCRIPT
 
 ;; js2-mode
@@ -243,32 +233,6 @@ Including indent-buffer, which should not be called automatically on save."
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; tern for completion and such?
-
-;; skewer mode for browser mind control
-(require 'skewer-mode)
-(require 'skewer-repl)
-(require 'skewer-html)
-(require 'skewer-css)
-(defun skewer-start ()
-  (interactive)
-  (let ((httpd-port 8023))
-    (httpd-start)
-    (message "Ready to skewer the browser. Now jack in with the bookmarklet.")))
-
-(define-key skewer-mode-map (kbd "<s-return>") 'skewer-eval-last-expression)
-(define-key skewer-mode-map (kbd "<S-s-return>") 'skewer-eval-defun)
-
-;; Bookmarklet to connect to skewer from the browser:
-;; javascript:(function(){var d=document ;var s=d.createElement('script');s.src='http://localhost:8023/skewer';d.body.appendChild(s);})()
-
-;;two space tabs in coffee
-(defun coffee-custom ()
-  "coffee-mode-hook"
-  (set (make-local-variable 'tab-width) 2))
-(add-hook 'coffee-mode-hook '(lambda() (coffee-custom)))
-
-(require 'flymake-coffee)
-(add-hook 'coffee-mode-hook 'flymake-coffee-load)
 
 ;;;;;; Some helpful gear for rest interfaces
 
