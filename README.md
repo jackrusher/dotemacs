@@ -33,28 +33,42 @@ required by [ag](https://github.com/Wilfred/ag.el):
 $ brew install ag
 ```
 
+This configuration uses the `doom-modeline` package to provide an
+aesthetically and functionally enhanced modeline. In order for it to
+display properly, you will need to run: 
+
+``` emacs-lisp
+M-x all-the-icons-install-fonts
+```
+
+... to download and install the icon fonts used to decorate the
+modeline.
+
 ### CUSTOMIZATION
 
 If you would like to extend this configuration, create a
 `<username>-local.el` file within your `.emacs.d/lisp` directory and
 that file will be loaded after this configuration has been
-initialized.
+initialized. You can create a separate version controlled directory
+and symlink to it if you want to manage that part of your
+configuration in this way.
 
 ## A PRIMER
 
 One of the goals of this configuration is to avoid the cognitive load
 of switching keyboard habits between applications. Luckily, many of
-the default emacs control sequences are also supported by OSX text
-editing panels and the major shells (and can be made more comformant
-via one's inputrc).
+the default emacs control sequences are also supported by MacOS text
+editing panels and the major shells (which can be made more comformant
+via one's `.inputrc` file).
 
-The usual OSX command key bindings are mostly supported. Command-S
+The usual MacOS command key bindings are mostly supported. Command-S
 saves, Command-F "finds" (searches forward) and Command-G continues
 the search, cut and paste, selection, and so on all operate
 normally. Some commands are modified so that they're the emacs
-semantic equivalent of their OS X counterparts. For example, Command-w
-"kills" (closes) the current buffer rather than the emacs window
-(which I feel should be full-screen most of the time).
+semantic equivalent of their MacOS counterparts. For example,
+Command-w "kills" (closes) the current buffer rather than the emacs
+window (which I feel should be either full-screen or split-screen with
+a browser most of the time).
 
 The emacs notation for key sequences looks like `a` (press a), `C-c`
 (control + c), `M-x` ("meta ex", where "meta" is the alt/option key
@@ -71,8 +85,9 @@ similar to Vim's `ctrl-p`.
 
 These commands both work with
 [tramp](http://www.gnu.org/software/tramp/), which is a great, great
-feature. One can open a file on a remote host via sftp by specifying
-its name like this:
+feature that provides access to files on remote servers, inside docker
+containers, and so on. One can open a file on a remote host via sftp
+by specifying its name like this:
 
 `hostname:/path/to/file`
 
@@ -104,10 +119,10 @@ emacs philosophy of movement: the base movement keys can be amplified
 with modifier keys. `M-left` will move one word to the left, `M-up
 arrow` will move up one paragraph, and so on. Of particular interest
 for programming modes, `C-M-left arrow` will navigate left by one
-`sexp` (S-expression in lisp terms, but some other "unit of code" in
+`sexp` (S-expression in lisp terms, but some other _unit of code_ in
 other languages).
 
-The usual OS X bindings for begin/end of line (`s-left arrow`,`s-right
+The usual MacOS bindings for begin/end of line (`s-left arrow`,`s-right
 arrow`) and top/bottom of document (`s-up arrow`, `s-down arrow`),
 page up and page down, and so forth, are also supported.
 
@@ -149,19 +164,13 @@ deletes a word at a time, `C-M-delete` deletes a paragraph at a
 time. These deletions go into the `kill-ring` for future `yank`ing
 (pasting).
 
-`fn-delete` deletes to the right (as in other OS X inputs),
+`fn-delete` deletes to the right (as in other MacOS inputs),
 `fn-M-delete` deletes to the right one word at a time, and
 `fn-C-M-delete` deletes the paragraph to the right.
 
 ### UNDO/REDO
 
-Command-z is undo, Shift-Command-Z is redo. This functionality is
-provided by a package called
-[undo-tree](http://www.emacswiki.org/emacs/UndoTree), which is similar
-to the vi package of the same name. It allows one to see recent
-changes as a decision tree and partially back out changes by choosing
-branches (like a mini revision control system in the editor). The undo
-visualizer is bound to Control-Command-z.
+As in the other programs: Command-z is undo, Shift-Command-Z is redo.
 
 ## EXPLORING EMACS
 
@@ -177,7 +186,7 @@ mini-bar, starting with the most recently executed function. One often
 does things like `M-x re<TAB><RET>` to complete and invoke
 `replace-string`.
 
-Consider using the `apropos` function when you roughly know what you
+Consider using the `apropos` function when you know roughly what you
 want to do, but aren't sure of the exact function that will do
 it. `M-x apropos` prompts you to enter a word (or words) related to
 what you'd like to do, and creates a buffer for you to browse various
@@ -229,9 +238,9 @@ using `M-.` and return from the definition with `M-,`.
 ## RESOURCES
 
 Watch this video on
-[Expand region](https://github.com/emacsmirror/expand-region). This is
+[`Expand region`](https://github.com/emacsmirror/expand-region). This is
 a feature every code editor should have. In this configuration, it's
-bound to `s-1` and "contract-region" is bound to `s-2`, which allows
+bound to `s-1` and `contract-region` is bound to `s-2`, which allows
 one to press `s-1` repeatedly without concern for overshooting the
 intended selection because it's easy to contract if we go to far.
 
@@ -239,7 +248,3 @@ If one intends to hack clojure, Common Lisp, scheme or elisp, it would
 be wise to get to know
 [SmartParens](https://github.com/Fuco1/smartparens/wiki/Paredit-and-smartparens),
 which has been added as a replacement for _paredit_.
-
-Those who build the web should look into
-[skewer-mode](https://github.com/skeeto/skewer-mode) for live browser
-mind control.
