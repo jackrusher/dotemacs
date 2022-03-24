@@ -86,6 +86,7 @@
 (use-package multiple-cursors)
 (use-package org :pin org)
 (use-package paredit)
+(use-package paren-face)
 (use-package pkg-info)
 (use-package pretty-symbols)
 (use-package rainbow-mode)
