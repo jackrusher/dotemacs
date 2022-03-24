@@ -48,7 +48,7 @@ Can be an integer to determine the exact padding."
   "A dark theme somewhat inspired by Noctilux and Light Table."
 
   ;; name        default   256           16
-  ((bg         '("#181818" "black"       "black"  ))
+  ((bg         '("#16161D" "black"       "black"  )) ; the hex code for actual eigengrau
    (fg         '("#bbc2cf" "#bfbfbf"     "brightwhite"  ))
 
    ;; These are off-color variants of bg/fg, used primarily for `solaire-mode',
@@ -74,7 +74,7 @@ Can be an integer to determine the exact padding."
    (grey       base4)
    (red        '("#ff6c6b" "#ff6655" "red"          ))
    (orange     '("#da8844" "#dd8844" "brightred"    ))
-   (green      '("#9fF49f" "#9fF49f" "green"        ))
+   (green      '("#9dF29d" "#9dF29d" "green"        ))
    (teal       '("#4db5bd" "#44b9b1" "brightgreen"  ))
    (yellow     '("#e8ba67" "#e8ba67" "yellow"       ))
    (blue       '("#51afef" "#51afef" "brightblue"   ))
@@ -93,8 +93,8 @@ Can be an integer to determine the exact padding."
    (builtin        magenta)
    (comments       (if doom-eigengrau-brighter-comments dark-cyan base5))
    (doc-comments   (doom-lighten (if doom-eigengrau-brighter-comments dark-cyan base5) 0.25))
-   (constants      violet) ;violet
-   (functions      teal) ;magenta
+   (constants      violet)
+   (functions      teal) 
    (keywords       green)
    (methods        cyan)
    (operators      green)
@@ -127,13 +127,21 @@ Can be an integer to determine the exact padding."
     (when doom-eigengrau-padded-modeline
       (if (integerp doom-eigengrau-padded-modeline) doom-eigengrau-padded-modeline 4))))
 
-
   ;;;; Base theme face overrides
   (((eval-sexp-fu-flash &override)  :background "#0A414C" :foreground "#84FBFF")
    ((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground fg)
    ((font-lock-comment-face &override)
     :background (if doom-eigengrau-brighter-comments (doom-lighten bg 0.05)))
+
+   ;; calm the parens a bit
+   ((show-paren-match &override) :foreground bg :background comments :weight 'ultra-bold)
+   ((show-paren-mismatch &override) :foreground nil :background "red")
+
+   ((paren-face &override) :foreground comments)
+   ((paren-face-match &override) :foreground "#666" :background bg :weight 'ultra-bold)
+
+   ;; subtle mode-line
    (mode-line
     :background modeline-bg :foreground modeline-fg
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
