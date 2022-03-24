@@ -157,8 +157,10 @@ Including indent-buffer, which should not be called automatically on save."
 ;;              :margin t))
 
 (define-key lisp-interaction-mode-map (kbd "C-c d") 'elisp-popup-doc)
+(define-key lisp-interaction-mode-map (kbd "<C-s-return>") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c d") 'elisp-popup-doc)
 (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
+(define-key emacs-lisp-mode-map (kbd "<C-s-return>") 'eval-buffer)
 
 ;; TODO binding?
 (defun eval-and-replace ()
@@ -179,7 +181,7 @@ Including indent-buffer, which should not be called automatically on save."
              (define-key geiser-mode-map (kbd "C-c d") 'geiser-doc-symbol-at-point)
              (define-key geiser-mode-map (kbd "<s-return>") 'geiser-eval-last-sexp)
              (define-key geiser-mode-map (kbd "<S-s-return>") 'geiser-eval-definition)
-             (define-key geiser-mode-map (kbd "<C-S-s-return>") 'geiser-eval-buffer)))
+             (define-key geiser-mode-map (kbd "<C-s-return>") 'geiser-eval-buffer)))
 
 ;;; XXX COMMON LISP moved to private config for the moment
 
@@ -201,7 +203,7 @@ Including indent-buffer, which should not be called automatically on save."
      (define-key clojure-mode-map (kbd "<s-return>") 'cider-eval-last-sexp)
      ;; add shift to eval the last expression, rather than the top-level one
      (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-defun-at-point)
-     (define-key clojure-mode-map (kbd "<C-S-s-return>") 'cider-eval-buffer)
+     (define-key clojure-mode-map (kbd "<C-s-return>") 'cider-eval-buffer)
      (add-to-list 'auto-mode-alist '("\\.edn\\'" . clojure-mode))
      (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))))
 
