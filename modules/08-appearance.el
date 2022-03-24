@@ -46,6 +46,9 @@
 ;; dim the parentheses
 (require 'paren-face)
 
+;; global minor mode to highlight matching parens
+(show-paren-mode)
+
 (require 'doom-themes)
 (require 'doom-modeline)
 (load-theme 'doom-eigengrau t)
