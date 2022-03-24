@@ -43,7 +43,6 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-region (point-min) (point-max)))
 
 ;; these are bound to "kill-this-buffer" by default
-(global-set-key (kbd "s-K") nil)
 (global-set-key (kbd "s-k") nil)
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -65,7 +64,7 @@ Including indent-buffer, which should not be called automatically on save."
 ;;;;;; LISPS
 
 ;; highlight matching parens, please
-(show-paren-mode)
+(global-paren-face-mode 't)
 
 ;; keybinding stolen from Lighttable, which I'm told stole it from
 ;; Flash.
