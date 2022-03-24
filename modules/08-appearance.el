@@ -1,7 +1,7 @@
 ;; -*- emacs-lisp -*-
 
-;; enable sRGB colors in the Cocoa version of em
-;;(setq ns-use-srgb-colorspace t)
+;; enable sRGB colors in the Cocoa version of emacs
+(setq ns-use-srgb-colorspace t)
 
 (setq
  ;; display line & column numbers in mode-line
@@ -43,6 +43,9 @@
 (mapc (lambda (m) (add-hook m (lambda () (push '("fn" . ?ƒ) prettify-symbols-alist))))
       '(clojure-mode-hook clojurescript-mode-hook))
 
+;; dim the parentheses
+(require 'paren-face)
+
 (require 'doom-themes)
 (require 'doom-modeline)
 (load-theme 'doom-eigengrau t)
@@ -58,10 +61,6 @@
       doom-themes-enable-italic t)  ; if nil, italics is universally disabled
 
 (doom-modeline-mode t)
-
-;; dim the parentheses TODO
-;; (require 'parenface-plus)
-;; (set-face-foreground 'paren-face "#666")
 
 ;; customize company-mode's popup
 ;; (let ((bg (face-attribute 'default :background)))
