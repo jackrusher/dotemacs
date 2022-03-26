@@ -72,17 +72,17 @@ Can be an integer to determine the exact padding."
    (base8      '("#DFDFDF" "#dfdfdf"     "white"        ))
 
    (grey       base4)
-   (red        '("#ff6c6b" "#ff6655" "red"          ))
-   (orange     '("#da8844" "#dd8844" "brightred"    ))
-   (green      '("#9dF29d" "#9dF29d" "green"        ))
+   (red        '("#ff463b" "#ff463b" "red"          ))
+   (orange     '("#DADA86" "#DADA86" "brightred"    )) ; actually yellow
+   (green      '("#86DA87" "#86DA87" "green"        ))
    (teal       '("#4db5bd" "#44b9b1" "brightgreen"  ))
-   (yellow     '("#e8ba67" "#e8ba67" "yellow"       ))
-   (blue       '("#51afef" "#51afef" "brightblue"   ))
-   (dark-blue  '("#2257A0" "#2257A0" "blue"         ))
-   (magenta    '("#c678dd" "#c678dd" "brightmagenta"))
-   (violet     '("#B997ec" "#B997ec" "magenta"      ))
-   (cyan       '("#99CCCC" "#99CCCC" "brightcyan"   ))
-   (dark-cyan  '("#5699AF" "#5699AF" "cyan"         ))
+   (yellow     '("#86DAB1" "#86DAB1" "yellow"       )) ; not yellow at all :)
+   (blue       '("#86AEDA" "#86AEDA" "brightblue"   ))
+   (dark-blue  '("#597492" "#597492" "blue"         )) ; darker "#43576d" ?
+   (magenta    '("#DB85D9" "#DB85D9" "brightmagenta"))
+   (violet     '("#B286DB" "#B286DB" "magenta"      ))
+   (cyan       '("#86D9DB" "#86D9DB" "brightcyan"   ))
+   (dark-cyan  '("#64a2a4" "#64a2a4" "cyan"         ))
 
    ;; These are the "universal syntax classes" that doom-themes establishes.
    ;; These *must* be included in every doom themes, or your theme will throw an
@@ -100,7 +100,7 @@ Can be an integer to determine the exact padding."
    (operators      green)
    (type           yellow)
    (strings        blue)
-   (variables      teal ) ;(doom-lighten magenta 0.4)
+   (variables      teal)
    (numbers        orange)
    (region         `(,(doom-lighten (car bg-alt) 0.15) ,@(doom-lighten (cdr base1) 0.35)))
    (error          red)
@@ -128,7 +128,10 @@ Can be an integer to determine the exact padding."
       (if (integerp doom-eigengrau-padded-modeline) doom-eigengrau-padded-modeline 4))))
 
   ;;;; Base theme face overrides
-  (((eval-sexp-fu-flash &override)  :background "#0A414C" :foreground "#84FBFF")
+  (((font-lock-variable-name-face &override) :slant 'normal)
+   ((font-lock-doc-face &override) :slant 'italic)
+   
+   ((eval-sexp-fu-flash &override)  :background "#0A414C" :foreground "#84FBFF")
    ((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground fg)
    ((font-lock-comment-face &override)
