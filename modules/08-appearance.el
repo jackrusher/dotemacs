@@ -27,8 +27,13 @@
                  "%b"))))
 
 ;; font and spacing
-(set-frame-font "Menlo-14")
-(setq-default line-spacing 4)
+(set-frame-font 
+ (concat
+  ;; take the first installed font from this list, use at size 15
+  (car (remove nil (mapcar (lambda (font) (car (member font (font-family-list))))
+                           '("JetBrains Mono" "Fira Code" "Menlo"))))
+  "-15"))
+(setq-default line-spacing 5)
 
 ;; color emoji support
 (if (fboundp 'set-fontset-font)
@@ -47,7 +52,7 @@
 (require 'paren-face)
 
 ;; global minor mode to highlight matching parens
-(show-paren-mode)
+(show-paren-mode t)
 
 (require 'doom-themes)
 (require 'doom-modeline)
