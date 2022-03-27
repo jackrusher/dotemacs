@@ -1,10 +1,16 @@
 ## WHY?
 
+I prefer my emacs to make some compromises with the surrounding system
+environment, which is MacOS in my case. This configuration allows for
+a fairly natural and aesthetically pleasing out-of-the-box experience
+on MacOS machines.
+
 After the release of emacs 24.1, I took the time to jettison an
 enormous quantity of elisp that had accumulated in my dotfiles since
 1985. Most of the custom features implemented by that code now have
 analogues in base emacs or in one of the many packages available via
-the various ELPA-compatible repositories.
+the various ELPA-compatible repositories. This process has made it
+more practical to share the base layer of my config.
 
 ## INSTALLATION
 
@@ -19,11 +25,11 @@ which I install using [homebrew](http://brew.sh/).
 $ brew install emacs-mac --with-xml2 --with-imagemagick --with-modern-icon --with-modules
 ```
 
-Once this is complete, you should also install the
-[Hunspell](http://hunspell.github.io) spelling checker and whatever
-dictionaries you need for whichever languages you use. This will be
-used by [Flyspell](http://www.emacswiki.org/emacs/FlySpell) to offer
-spell check in any text modes you use.
+Once this is complete, you should also install
+[Hunspell](http://hunspell.github.io) and whatever dictionaries you
+need for whichever languages you use. This will be used by
+[Flyspell](http://www.emacswiki.org/emacs/FlySpell) to offer spell
+check in any text modes you use.
 
 I also recommend that you install [The Silver
 Searcher](https://github.com/ggreer/the_silver_searcher), which is
@@ -32,6 +38,10 @@ required by [ag](https://github.com/Wilfred/ag.el):
 ```bash
 $ brew install ag
 ```
+
+My favorite free coding font is [JetBrains Mono](https://www.jetbrains.com/lp/mono/), which will be used if it is
+installed. Otherwise, emacs will try to load [Fira Code](https://github.com/tonsky/FiraCode), after which it will fall
+back to Apple's `Menlo`.
 
 This configuration uses the `doom-modeline` package to provide an
 aesthetically and functionally enhanced modeline. In order for it to
@@ -50,8 +60,8 @@ If you would like to extend this configuration, create a
 `<username>-local.el` file within your `.emacs.d/lisp` directory and
 that file will be loaded after this configuration has been
 initialized. You can create a separate version controlled directory
-and symlink to it if you want to manage that part of your
-configuration in this way.
+for your personal modifications and symlink to keep those extensions
+in version control.
 
 ## A PRIMER
 
@@ -78,24 +88,23 @@ down the control key while pressing first `x` then `f`.
 
 ### BUFFERS, FRAMES AND FILES
 
-Ctrl-x Ctrl-f is "find file," which allows one to find files quickly
-using command completion in the mini-buffer. Command-O opens a file,
-but does so using a pattern-matching "find in project" function,
-similar to Vim's `ctrl-p`.
+`C-x C-f` is "find file," which allows one to find files quickly using
+command completion in the mini-buffer. `s-O` opens a file, but does so
+using a pattern-matching "find in project" function, similar to Vim's
+`ctrl-p`.
 
 These commands both work with
-[tramp](http://www.gnu.org/software/tramp/), which is a great, great
-feature that provides access to files on remote servers, inside docker
+[tramp](http://www.gnu.org/software/tramp/), which is a great feature
+that provides access to files on remote servers, inside docker
 containers, and so on. One can open a file on a remote host via sftp
 by specifying its name like this:
 
 `hostname:/path/to/file`
 
 `C-x C-b` is the command to switch the current frame (like a pane in
-`tmux`, basically a subwindow) to a buffer by name with command
-completion. It remembers recently open files, so it makes an easy way
-to open anything one has been working on without hunting around in the
-file system.
+`tmux`; basically a subwindow) to another buffer by name. It remembers
+recently open files, and so makes an easy way to open anything one has
+been working on without hunting around in the file system.
 
 Split the current frame in two vertically by hitting `C-x 2`,
 horizontally by `C-x 3`. Close the current frame (but not the
@@ -126,6 +135,9 @@ The usual MacOS bindings for begin/end of line (`s-left arrow`,`s-right
 arrow`) and top/bottom of document (`s-up arrow`, `s-down arrow`),
 page up and page down, and so forth, are also supported.
 
+All of these bindings can be combined with the `shift` key to select
+text.
+
 ### SEARCHING
 
 Although the above key combinations provide for rapid navigation, one
@@ -148,9 +160,9 @@ replacing ones where the user presses `space` and skipping the ones
 where the user presses `delete`.
 
 To find everything that matches in the current buffer, check out
-`occur`, which is bound to `M-s-o`. It's worth perusing the
-documentation of occur, as it's quite powerful and can be made to do
-interesting things using the _universal argument_.
+`occur`, which is bound to `M-s-o`. It's worth perusing the occur's
+documentation, as it's quite powerful and can be made to do
+interesting things using the [_universal argument_](https://irreal.org/blog/?p=1613).
 
 For searching across multiple files,
 [ag](https://github.com/Wilfred/ag.el) provides a simple interface
@@ -218,7 +230,7 @@ many possible completions.
 [Magit](https://github.com/magit/magit) is a nice integrated git
 for emacs. There are others like it, but this one is my favorite.
 
-## DYNAMIC PROGRAMMING LANGUAGES
+## INTERACTIVE PROGRAMMING LANGUAGES
 
 SLIME, nREPL, run-ruby, run-python, and so on. There's a great deal of
 power when interacting with external interpretors in emacs, but it's
