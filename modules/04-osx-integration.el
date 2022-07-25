@@ -88,5 +88,4 @@
   ;; turn off super disturbing visible bell
   (setq visible-bell nil)
 
-  ;; does not work yet in railway cat :(
-  (setq mac-right-alternate-modifier nil))
+  (setq mac-right-option-modifier nil))
