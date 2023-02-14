@@ -17,8 +17,7 @@
 
 (require 'doom-themes)
 
-;;
-;;; Variables
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Variables
 
 (defgroup doom-eigengrau-theme nil
   "Options for the `doom-eigengrau' theme."
@@ -40,28 +39,26 @@ Can be an integer to determine the exact padding."
   :group 'doom-eigengrau-theme
   :type '(choice integer boolean))
 
-
-;;
-;;; Theme definition
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Theme definition
 
 (def-doom-theme doom-eigengrau
   "A dark theme somewhat inspired by Noctilux and Light Table."
 
   ;; name        default   256           16
-  ((bg         '("#16161D" "black"       "black"  )) ; the hex code for actual eigengrau
-   (fg         '("#bbc2cf" "#bfbfbf"     "brightwhite"  ))
+  ((bg         '("#16161D" "black"       "black"  )) ; hex code for actual eigengrau
+   (fg         '("#b2b2bb" "#c5c5c5"     "brightwhite"  ))
 
    ;; These are off-color variants of bg/fg, used primarily for `solaire-mode',
    ;; but can also be useful as a basis for subtle highlights (e.g. for hl-line
    ;; or region), especially when paired with the `doom-darken', `doom-lighten',
    ;; and `doom-blend' helper functions.
-   (bg-alt     '("#21242b" "black"       "black"        ))
-   (fg-alt     '("#5B6268" "#2d2d2d"     "white"        ))
-
+   (bg-alt     '("#212128" "black"       "black"        ))
+   (fg-alt     '("#5b5b60" "#2d2d2d"     "white"        ))
+   
    ;; These should represent a spectrum from bg to fg, where base0 is a starker
    ;; bg and base8 is a starker fg. For example, if bg is light grey and fg is
    ;; dark grey, base0 should be white and base8 should be black.
-   (base0      '("#1B2229" "black"       "black"        ))
+   (base0      '("#16161D" "black"       "black"        ))
    (base1      '("#1c1f24" "#1e1e1e"     "brightblack"  ))
    (base2      '("#202328" "#2e2e2e"     "brightblack"  ))
    (base3      '("#23272e" "#262626"     "brightblack"  ))

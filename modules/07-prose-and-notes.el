@@ -1,5 +1,12 @@
 ;; -*- emacs-lisp -*-
 
+;; use soft wrap for text modes because it isn't the 80s anymore
+(defun jackrusher-text-mode-hook ()
+  (visual-line-mode 1)
+  (auto-fill-mode nil))
+
+(add-hook 'text-mode-hook 'jackrusher-text-mode-hook)
+
 (require 'markdown-mode)
 
 (add-to-list 'auto-mode-alist

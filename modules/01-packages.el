@@ -81,7 +81,9 @@
 (use-package js2-mode)
 (use-package js2-refactor)
 (use-package json-mode)
-(use-package magit)
+(use-package magit
+  :custom ((magit-diff-refine-hunk 'all)
+           (magit-process-finish-apply-ansi-colors t)))
 (use-package markdown-mode)
 (use-package multiple-cursors)
 (use-package org :pin org)
