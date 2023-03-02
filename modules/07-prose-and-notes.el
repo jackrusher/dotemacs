@@ -6,6 +6,8 @@
   (auto-fill-mode nil))
 
 (add-hook 'text-mode-hook 'jackrusher-text-mode-hook)
+(add-hook 'gfm-mode-hook 'jackrusher-text-mode-hook)
+(add-hook 'markdown-mode-hook 'jackrusher-text-mode-hook)
 
 (require 'markdown-mode)
 
