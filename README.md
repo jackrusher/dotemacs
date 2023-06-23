@@ -22,7 +22,7 @@ YAMAMOTO Mitsuharu's Mac port, also called the _railwaycat_ version,
 which I install using [homebrew](http://brew.sh/).
 
 ```bash
-$ brew tap railwaycat/emacsmacport && brew install emacs-mac --with-xml2 --with-imagemagick --with-modern-icon --with-modules
+$ brew tap railwaycat/emacsmacport && brew install emacs-mac --with-imagemagick --with-modern-icon --with-modules
 ```
 
 Once this is complete, you should also install
