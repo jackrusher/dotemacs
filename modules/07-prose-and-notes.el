@@ -2,8 +2,9 @@
 
 ;; use soft wrap for text modes because it isn't the 80s anymore
 (defun jackrusher-text-mode-hook ()
-  (visual-line-mode 1)
-  (auto-fill-mode nil))
+  (interactive)
+  (auto-fill-mode nil)
+  (visual-line-mode 1))
 
 (add-hook 'text-mode-hook 'jackrusher-text-mode-hook)
 (add-hook 'gfm-mode-hook 'jackrusher-text-mode-hook)
@@ -20,7 +21,8 @@
 (dolist (hook '(text-mode-hook))
       (add-hook hook (lambda () (flyspell-mode 1))))
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; reverting this behavior!
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; I prefer my navigation keys be left alone, please.
 (eval-after-load 'markdown-mode
