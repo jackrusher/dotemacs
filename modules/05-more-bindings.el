@@ -7,7 +7,13 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; ido-mode is a work of beauty and magic
+;; smex is "smart M-x"
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(setq smex-key-advice-ignore-menu-bar t)
+
+;; ido-mode gives us much nicer fuzzy completion
 (ido-mode t)
 (ido-everywhere t)
 (ido-ubiquitous-mode t)
@@ -20,11 +26,8 @@
       ido-handle-duplicate-virtual-buffers 2
       ido-max-prospects 10)
 
-;; smex is "smart M-x"
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(setq smex-key-advice-ignore-menu-bar t)
+;; ido-grid-mode uses our big monitor more sensibly
+(ido-grid-mode)
 
 ;; nicer buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)

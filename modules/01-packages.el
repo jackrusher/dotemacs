@@ -19,26 +19,6 @@
 (eval-and-compile
  (require 'use-package))
 
-;;;; Install straight
-;; (defvar bootstrap-version)
-
-;; (let ((install-url "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el")
-;;       (bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-;;       (bootstrap-version 5))
-;;   (unless (file-exists-p bootstrap-file)
-;;     (with-current-buffer (url-retrieve-synchronously install-url 'silent 'inhibit-cookies)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp)))
-;;   (load bootstrap-file nil 'nomessage))
-
-;; ;;;; Tell it to hook into use-package
-;; (straight-use-package 'use-package)
-;; (setq straight-use-package-by-default t)
-
-;; ;;;; Create a version file if it does not yet exist
-;; (when (not (file-exists-p (expand-file-name "straight/versions/default.el" straight-base-dir)))
-;;   (straight-freeze-versions))
-
 ;;; Packages we require
 (use-package ace-jump-mode)
 (use-package ag)
@@ -52,15 +32,23 @@
 (use-package cider :pin melpa-stable)
 (use-package cider-eval-sexp-fu)
 
-;; completion plugins
-(use-package company)
+;; in-buffer completion framework
+ (use-package company
+    :ensure t
+    :commands (global-company-mode)
+    :init
+    (global-company-mode)
+    :custom
+    (company-tooltip-align-annotations 't)
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.1))
+
 ;;(use-package company-ghc)
 (use-package company-inf-ruby)
 (use-package company-go)
 
 (use-package dash)
 (use-package diminish)
-(use-package docker-tramp)
 (use-package doom-themes)
 (use-package doom-modeline)
 (use-package elisp-slime-nav)
@@ -77,6 +65,7 @@
 (use-package haskell-mode)
 (use-package highlight)
 (use-package ido-completing-read+)
+(use-package ido-grid-mode)
 (use-package inf-ruby)
 (use-package js2-mode)
 (use-package js2-refactor)
@@ -100,7 +89,7 @@
 (use-package smartparens)
 (use-package smex)
 (use-package tuareg)
-;;(use-package typopunct)
+(use-package typo)
 (use-package undo-fu)
 (use-package uuid)
 (use-package visual-regexp)
@@ -108,3 +97,5 @@
 (use-package which-key)
 (use-package yaml-mode)
 (use-package yasnippet)
+
+;;'(ido-grid-mode lsp-mode yaml-mode which-key web-mode visual-regexp uuid use-package undo-fu typo tuareg swift-mode smex smartparens slime-company simple-httpd rustic robe restclient rainbow-mode pretty-symbols pkg-info paren-face paredit ox-reveal magit julia-mode json-mode indium ido-completing-read+ htmlize highlight haskell-mode haml-mode geiser-racket geiser-kawa geiser-chez fringe-helper flymake-ruby flymake-cursor find-file-in-project expand-region elisp-slime-nav doom-themes doom-modeline diminish company-pollen company-inf-ruby company-go cider-eval-sexp-fu cider cargo bundler atomic-chrome aggressive-indent ag ace-jump-mode ac-geiser)
