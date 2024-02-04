@@ -205,6 +205,8 @@ Including indent-buffer, which should not be called automatically on save."
      ;; add shift to eval the last expression, rather than the top-level one
      (define-key clojure-mode-map (kbd "<S-s-return>") 'cider-eval-defun-at-point)
      (define-key clojure-mode-map (kbd "<C-s-return>") 'cider-eval-buffer)
+     (define-key clojure-mode-map (kbd "<M-return>") 'cider-eval-sexp-up-to-point)
+     (define-key clojure-mode-map (kbd "<M-S-return>") 'cider-eval-defun-up-to-point)
      (add-to-list 'auto-mode-alist '("\\.edn\\'" . clojure-mode))
      (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))))
 
