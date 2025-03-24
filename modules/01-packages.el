@@ -59,7 +59,6 @@
 (use-package flymake-ruby)
 (use-package fringe-helper)
 (use-package geiser)
-(use-package git-commit)
 (use-package go-mode)
 (use-package haml-mode)
 (use-package haskell-mode)
