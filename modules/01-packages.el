@@ -24,7 +24,6 @@
 (use-package ag)
 (use-package aggressive-indent)
 (use-package all-the-icons)
-(use-package bundler)
 (use-package caml)
 
 ;; clojure stuff
